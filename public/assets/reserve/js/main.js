@@ -5,7 +5,6 @@ const thankStep = document.querySelector(".thanks-step");
 const nextBtn = document.getElementById("next");
 const backBtn = document.getElementById("back");
 const stepNums = document.querySelectorAll("aside .sidebar .icon");
-const monthYearPlan = document.querySelector("#sub");
 const changePlanBtn = document.querySelector("#changePlan");
 const addonss = document.querySelectorAll(".addons .addon");
 const addonChecks = document.querySelectorAll(".addons .form-check-input");
@@ -64,7 +63,6 @@ const addonData = {
   customprofile: { name: "custom profile", month: 1, year: 20 },
 };
 
-monthYearPlan.addEventListener("change", changePlan);
 changePlanBtn.addEventListener("click", function () {
   currentStep = 1;
   updateStep();
@@ -154,27 +152,7 @@ function removeIfChange() {
     });
   }
 }
-//change plan Month --> Year
-function changePlan() {
-  //in yearly mode
-  if (monthYearPlan.checked) {
-    monthPlan.classList.add("d-none");
-    monthlyAddons.classList.add("d-none");
-    yearPlan.classList.remove("d-none");
-    yearlyAddons.classList.remove("d-none");
-    choosePlan(yearlyPlanBtns, yplanCards);
 
-    removeIfChange();
-  }
-  // in monthly mode
-  else {
-    monthPlan.classList.remove("d-none");
-    monthlyAddons.classList.remove("d-none");
-    yearPlan.classList.add("d-none");
-    yearlyAddons.classList.add("d-none");
-    removeIfChange();
-  }
-}
 //choose plan
 function choosePlan(btns = monthlyPlanBtns, plans = mplanCards) {
   btns.forEach((btn, ind) => {
@@ -339,15 +317,9 @@ function formChecker() {
   }
 
   if (currentStep == 1) {
-    if (monthYearPlan.checked) {
-      if (!validatePlans(yearlyPlanBtns)) {
-        valid = false;
-      }
-    } else {
       if (!validatePlans()) {
         valid = false;
       }
-    }
     return valid;
   }
 

@@ -27,7 +27,9 @@ class CarImport implements ToModel, WithHeadingRow, OnEachRow
 
         // تبدیل تاریخ‌های عددی اکسل به فرمت تاریخ میلادی
         $insuranceExpiryDate = $this->transformDate($row['expiry_insurance_date']);
-
+        $issueDate = $this->transformDate($row['issue_date']);
+        $expiryDate = $this->transformDate($row['expiry_date']);
+        $passingDate = $this->transformDate($row['passing_date']);
         // Extract brand and model
         $parts = explode(' ', trim($row['model']), 2);
         $brand = $parts[0];
@@ -36,8 +38,10 @@ class CarImport implements ToModel, WithHeadingRow, OnEachRow
         $carModel = CarModel::firstOrCreate([
             'brand' => $brand,
             'model' => $model,
+        ], [
+            'brand_icon' => $row['brand_icon'] ?? null, // آیکون برند
+            'images' => $row['car_model_images'] ?? null, // تصاویر مدل
         ]);
-
         // Check if the car already exists
         $existingCar = Car::where('plate_number', $row['plate_no'])
             ->orWhere('chassis_number', $row['chassis_no'])
@@ -47,13 +51,19 @@ class CarImport implements ToModel, WithHeadingRow, OnEachRow
             // Skip the row if the car already exists
             return null;
         }
-
         // Create the car record
         $car = Car::create([
             'car_model_id' => $carModel->id,
             'plate_number' => $row['plate_no'],
             'chassis_number' => $row['chassis_no'],
             'manufacturing_year' => $row['make_year'],
+            'issue_date' => $issueDate,
+            'expiry_date' => $expiryDate,
+            'registration_valid_for_days' => $row['registration_valid_for_days'],
+            'registration_status' => $row['registration_status'],
+            'passing_date' => $passingDate,
+            'passing_status' => $row['passing_status'],
+            'passing_valid_for_days' => $row['passing_valid_for_days'],
             'gps' => $row['gps'] === 'DONE',
             'status' => 'available',
             'availability' => true,

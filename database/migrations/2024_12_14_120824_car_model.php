@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id(); // شناسه منحصربه‌فرد
             $table->string('brand'); // برند
             $table->string('model'); // مدل
+            $table->string('brand_icon')->nullable(); //  ایکون برند 
             $table->float('engine_capacity')->nullable(); // حجم موتور
             $table->enum('fuel_type', ['petrol', 'diesel', 'hybrid', 'electric'])->nullable(); // نوع سوخت
             $table->enum('gearbox_type', ['manual', 'automatic'])->nullable(); // نوع گیربکس

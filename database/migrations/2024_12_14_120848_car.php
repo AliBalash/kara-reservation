@@ -25,6 +25,15 @@ return new class extends Migration
             $table->string('color')->nullable(); // رنگ خودرو
             $table->string('chassis_number')->unique(); // شماره شاسی
             $table->boolean('gps')->default(false); // وضعیت GPS
+
+            $table->date('issue_date')->nullable(); // تاریخ شروع ثبت‌نام
+            $table->date('expiry_date')->nullable(); // تاریخ انقضای ثبت‌نام
+            $table->date('passing_date')->nullable(); //  پاسینگ = معاینه فنی   تاریخ عبور
+            $table->integer('passing_valid_for_days')->nullable(); // تعداد روزهای اعتبار عبور
+            $table->enum('passing_status', ['done', 'pending', 'failed'])->default('done'); // وضعیت ثبت‌نام
+            $table->integer('registration_valid_for_days')->nullable(); // رجیستری خودرو = هر سال کارت ماشین تمدید میشه تعداد روزهای اعتبار ثبت‌نام
+            $table->enum('registration_status', ['done', 'pending', 'failed'])->default('done'); // وضعیت ثبت‌نام
+
             $table->text('notes')->nullable(); // یادداشت‌ها
             $table->timestamps(); // زمان‌های ایجاد و ویرایش
 
@@ -32,7 +41,7 @@ return new class extends Migration
             $table->foreign('car_model_id')->references('id')->on('car_models')->onDelete('cascade');
         });
     }
-    
+
 
     /**
      * Reverse the migrations.

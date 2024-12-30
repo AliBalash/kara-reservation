@@ -76,6 +76,7 @@ body {
 }
 .plan-step .plans .plan:hover {
   border-color: hsl(213, 96%, 18%);
+
 }
 .plan-step .plans .plan.checked {
   background-color: hsl(217, 100%, 97%);
@@ -368,3 +369,59 @@ label[for=darkmode] {
 
 
 
+.plan {
+  width: 250px; /* تنظیم عرض برای هر گزینه */
+  height: 300px; /* تنظیم ارتفاع */
+  overflow: hidden;
+}
+
+.thumbnail-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* حفظ تناسب عکس */
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+.overlay-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.5); /* مقدار پیش‌فرض پس‌زمینه */
+  text-align: center;
+  transition: background 0.3s ease; /* زمان و نوع انیمیشن */
+}
+.overlay-content:hover {
+  background: rgba(0, 0, 0, 0.29); /* پس‌زمینه نیمه‌شفاف برای متن */
+}
+
+.icon-overlay {
+  width: 50px; /* تنظیم اندازه آیکون */
+  height: auto;
+  margin-bottom: 10px; /* فاصله از متن */
+}
+
+.text-overlay h5, .text-overlay h6 {
+  margin: 5px 0; /* فاصله بین متن‌ها */
+}
+
+.icon-overlay {
+  width: 50px; /* اندازه پیش‌فرض آیکون */
+  height: auto;
+  margin-bottom: 10px;
+  transition: transform 0.3s ease; /* زمان و نوع انیمیشن */
+}
+
+.overlay-content:hover .icon-overlay {
+  transform: scale(1.2); /* بزرگ‌تر کردن آیکون به 120% اندازه اصلی */
+}

@@ -27,14 +27,14 @@
     </style>
 </head>
 
-<body class="">
+<body >
     <!-- main container start -->
     <div class="center-box d-flex justify-content-center align-items-center">
         <div class="wrapper p-4">
-            <label for="darkmode" class="">
+            <label for="darkmode" >
                 <input type="checkbox" id="darkmode" />
                 <div class="theme-mode d-flex">
-                    <img src="{{ asset('assets/reserve/assets/images/dark1.png') }}" class=""
+                    <img src="{{ asset('assets/reserve/assets/images/dark.png') }}"
                         alt="darkMode icon from flat icons" />
                 </div>
             </label>
@@ -87,7 +87,7 @@
                     <!-- Start profile step -->
                     <div class="step step-1 row profile-step p-4 d-none">
                         <header class="col-12">
-                            <h1 class="">Profile Info</h1>
+                            <h1 >Profile Info</h1>
                             <p class="lead">Please provide your name, email address, and phone number.</p>
                         </header>
 
@@ -132,428 +132,347 @@
                     <!-- Start plan step -->
                     <div class="step step-2 plan-step p-2 d-none">
                         <header class="col-12">
-                            <h1 class="">Select your plan</h1>
+                            <h1 >Select your plan</h1>
                             <p class="lead">You have the option of monthly or yearly billing.</p>
                         </header>
 
 
                         <div class="form-check plans d-flex gap-2 flex-column flex-md-row row" id="month-plan">
 
-                            <label class="plan shadow-sm p-3 m-1 rounded d-flex d-md-block">
+                            <label class="plan shadow-sm p-3 m-1 rounded d-flex d-md-block position-relative">
                                 <input type="radio" name="plan" id="arcade"
                                     class="form-check-input plan-type d-none" value="month-arcade" />
-                                <img src="{{ asset('assets/reserve/assets/images/icon-arcade.svg') }}"
-                                    class="me-2 me-md-0 mb-0 mb-md-5" alt="Arcade" />
-                                <div>
-                                    <h5>Arcade</h5>
-                                    <h6 class="m-y-on">$9/mo</h6>
+                                <img src="{{ asset('assets/reserve/cartest.png') }}" class="thumbnail-img rounded"
+                                    alt="Arcade Thumbnail" />
+                                <div class="overlay-content">
+                                    <img src="{{ asset('assets/reserve/assets/images/icon-arcade.svg') }}"
+                                        class="icon-overlay" alt="Arcade Icon" />
+                                    <div class="text-overlay">
+                                        <h5>Arcade</h5>
+                                        <h6 class="m-y-on">$9/mo</h6>
+                                    </div>
                                 </div>
                             </label>
 
-                            <label class="plan shadow-sm p-3 m-1 rounded d-flex d-md-block">
+
+                            <label class="plan shadow-sm p-3 m-1 rounded d-flex d-md-block position-relative">
                                 <input type="radio" name="plan" id="advanced"
                                     class="form-check-input plan-type d-none" value="month-advanced" />
-                                <img src="{{ asset('assets/reserve/assets/images/icon-advanced.svg') }}""
-                                    class="me-2 me-md-0 mb-0 mb-md-5 alt="Advanced" />
-                                <div>
-                                    <h5>Advanced</h5>
-                                    <h6>$12/mo</h6>
+                                <img src="{{ asset('assets/car-pics/AUDI A6 2023.webp') }}" class="thumbnail-img rounded"
+                                    alt="Advanced Thumbnail" />
+                                <div class="overlay-content">
+                                    <img src="{{ asset('assets/reserve/assets/images/icon-bmw.svg') }}"
+                                        class="icon-overlay" alt="Advanced Icon" />
+                                    <div class="text-overlay">
+                                        <h5>Advanced</h5>
+                                        <h6 class="m-y-on">$9/mo</h6>
+                                    </div>
                                 </div>
                             </label>
 
-                            <label class="plan shadow-sm p-3 m-1 rounded d-flex d-md-block">
+                            <label class="plan shadow-sm p-3 m-1 rounded d-flex d-md-block position-relative">
                                 <input type="radio" name="plan" id="pro"
                                     class="form-check-input plan-type d-none" value="month-pro" />
-                                <img src="{{ asset('assets/reserve/assets/images/icon-pro.svg') }}"
-                                    class="me-2 me-md-0 mb-0 mb-md-5" alt="Pro" />
-                                <div>
-                                    <h5>Pro</h5>
-                                    <h6>$20/mo</h6>
+                                <img src="{{ asset('assets/reserve/cartest.png') }}" class="thumbnail-img rounded"
+                                    alt="Advanced Thumbnail" />
+                                <div class="overlay-content">
+                                    <img src="{{ asset('assets/reserve/assets/images/icon-pro.svg') }}"
+                                        class="icon-overlay" alt="Pro Icon" />
+                                    <div class="text-overlay">
+                                        <h5>Pro</h5>
+                                        <h6 class="m-y-on">$9/mo</h6>
+                                    </div>
                                 </div>
 
                             </label>
 
-                            <label class="plan shadow-sm p-3 m-1 rounded d-flex d-md-block">
+                            <label class="plan shadow-sm p-3 m-1 rounded d-flex d-md-block position-relative">
                                 <input type="radio" name="plan" id="arcade"
                                     class="form-check-input plan-type d-none" value="month-arcade" />
-                                <img src="{{ asset('assets/reserve/assets/images/icon-arcade.svg') }}"
-                                    class="me-2 me-md-0 mb-0 mb-md-5" alt="Arcade" />
-                                <div>
-                                    <h5>Arcade</h5>
-                                    <h6 class="m-y-on">$9/mo</h6>
+                                <img src="{{ asset('assets/reserve/cartest.png') }}" class="thumbnail-img rounded"
+                                    alt="Arcade Thumbnail" />
+                                <div class="overlay-content">
+                                    <img src="{{ asset('assets/reserve/assets/images/icon-arcade.svg') }}"
+                                        class="icon-overlay" alt="Arcade Icon" />
+                                    <div class="text-overlay">
+                                        <h5>Arcade</h5>
+                                        <h6 class="m-y-on">$9/mo</h6>
+                                    </div>
                                 </div>
                             </label>
 
-                            <label class="plan shadow-sm p-3 m-1 rounded d-flex d-md-block">
+
+                            <label class="plan shadow-sm p-3 m-1 rounded d-flex d-md-block position-relative">
                                 <input type="radio" name="plan" id="advanced"
                                     class="form-check-input plan-type d-none" value="month-advanced" />
-                                <img src="{{ asset('assets/reserve/assets/images/icon-advanced.svg') }}""
-                                    class="me-2 me-md-0 mb-0 mb-md-5 alt="Advanced" />
-                                <div>
-                                    <h5>Advanced</h5>
-                                    <h6>$12/mo</h6>
+                                <img src="{{ asset('assets/reserve/cartest.png') }}" class="thumbnail-img rounded"
+                                    alt="Advanced Thumbnail" />
+                                <div class="overlay-content">
+                                    <img src="{{ asset('assets/reserve/assets/images/icon-bmw.svg') }}"
+                                        class="icon-overlay" alt="Advanced Icon" />
+                                    <div class="text-overlay">
+                                        <h5>Advanced</h5>
+                                        <h6 class="m-y-on">$9/mo</h6>
+                                    </div>
                                 </div>
                             </label>
 
-                            <label class="plan shadow-sm p-3 m-1 rounded d-flex d-md-block">
+                            <label class="plan shadow-sm p-3 m-1 rounded d-flex d-md-block position-relative">
                                 <input type="radio" name="plan" id="pro"
                                     class="form-check-input plan-type d-none" value="month-pro" />
-                                <img src="{{ asset('assets/reserve/assets/images/icon-pro.svg') }}"
-                                    class="me-2 me-md-0 mb-0 mb-md-5" alt="Pro" />
-                                <div>
-                                    <h5>Pro</h5>
-                                    <h6>$20/mo</h6>
+                                <img src="{{ asset('assets/reserve/cartest.png') }}" class="thumbnail-img rounded"
+                                    alt="Advanced Thumbnail" />
+                                <div class="overlay-content">
+                                    <img src="{{ asset('assets/reserve/assets/images/icon-pro.svg') }}"
+                                        class="icon-overlay" alt="Pro Icon" />
+                                    <div class="text-overlay">
+                                        <h5>Pro</h5>
+                                        <h6 class="m-y-on">$9/mo</h6>
+                                    </div>
                                 </div>
 
                             </label>
 
-                            <label class="plan shadow-sm p-3 m-1 rounded d-flex d-md-block">
+                            <label class="plan shadow-sm p-3 m-1 rounded d-flex d-md-block position-relative">
                                 <input type="radio" name="plan" id="arcade"
                                     class="form-check-input plan-type d-none" value="month-arcade" />
-                                <img src="{{ asset('assets/reserve/assets/images/icon-arcade.svg') }}"
-                                    class="me-2 me-md-0 mb-0 mb-md-5" alt="Arcade" />
-                                <div>
-                                    <h5>Arcade</h5>
-                                    <h6 class="m-y-on">$9/mo</h6>
+                                <img src="{{ asset('assets/reserve/cartest.png') }}" class="thumbnail-img rounded"
+                                    alt="Arcade Thumbnail" />
+                                <div class="overlay-content">
+                                    <img src="{{ asset('assets/reserve/assets/images/icon-arcade.svg') }}"
+                                        class="icon-overlay" alt="Arcade Icon" />
+                                    <div class="text-overlay">
+                                        <h5>Arcade</h5>
+                                        <h6 class="m-y-on">$9/mo</h6>
+                                    </div>
                                 </div>
                             </label>
 
-                            <label class="plan shadow-sm p-3 m-1 rounded d-flex d-md-block">
+
+                            <label class="plan shadow-sm p-3 m-1 rounded d-flex d-md-block position-relative">
                                 <input type="radio" name="plan" id="advanced"
                                     class="form-check-input plan-type d-none" value="month-advanced" />
-                                <img src="{{ asset('assets/reserve/assets/images/icon-advanced.svg') }}""
-                                    class="me-2 me-md-0 mb-0 mb-md-5 alt="Advanced" />
-                                <div>
-                                    <h5>Advanced</h5>
-                                    <h6>$12/mo</h6>
+                                <img src="{{ asset('assets/reserve/cartest.png') }}" class="thumbnail-img rounded"
+                                    alt="Advanced Thumbnail" />
+                                <div class="overlay-content">
+                                    <img src="{{ asset('assets/reserve/assets/images/icon-bmw.svg') }}"
+                                        class="icon-overlay" alt="Advanced Icon" />
+                                    <div class="text-overlay">
+                                        <h5>Advanced</h5>
+                                        <h6 class="m-y-on">$9/mo</h6>
+                                    </div>
                                 </div>
                             </label>
 
-                            <label class="plan shadow-sm p-3 m-1 rounded d-flex d-md-block">
+                            <label class="plan shadow-sm p-3 m-1 rounded d-flex d-md-block position-relative">
                                 <input type="radio" name="plan" id="pro"
                                     class="form-check-input plan-type d-none" value="month-pro" />
-                                <img src="{{ asset('assets/reserve/assets/images/icon-pro.svg') }}"
-                                    class="me-2 me-md-0 mb-0 mb-md-5" alt="Pro" />
-                                <div>
-                                    <h5>Pro</h5>
-                                    <h6>$20/mo</h6>
+                                <img src="{{ asset('assets/reserve/cartest.png') }}" class="thumbnail-img rounded"
+                                    alt="Advanced Thumbnail" />
+                                <div class="overlay-content">
+                                    <img src="{{ asset('assets/reserve/assets/images/icon-pro.svg') }}"
+                                        class="icon-overlay" alt="Pro Icon" />
+                                    <div class="text-overlay">
+                                        <h5>Pro</h5>
+                                        <h6 class="m-y-on">$9/mo</h6>
+                                    </div>
                                 </div>
 
                             </label>
-                            <label class="plan shadow-sm p-3 m-1 rounded d-flex d-md-block">
+
+                            <label class="plan shadow-sm p-3 m-1 rounded d-flex d-md-block position-relative">
                                 <input type="radio" name="plan" id="arcade"
                                     class="form-check-input plan-type d-none" value="month-arcade" />
-                                <img src="{{ asset('assets/reserve/assets/images/icon-arcade.svg') }}"
-                                    class="me-2 me-md-0 mb-0 mb-md-5" alt="Arcade" />
-                                <div>
-                                    <h5>Arcade</h5>
-                                    <h6 class="m-y-on">$9/mo</h6>
+                                <img src="{{ asset('assets/reserve/cartest.png') }}" class="thumbnail-img rounded"
+                                    alt="Arcade Thumbnail" />
+                                <div class="overlay-content">
+                                    <img src="{{ asset('assets/reserve/assets/images/icon-arcade.svg') }}"
+                                        class="icon-overlay" alt="Arcade Icon" />
+                                    <div class="text-overlay">
+                                        <h5>Arcade</h5>
+                                        <h6 class="m-y-on">$9/mo</h6>
+                                    </div>
                                 </div>
                             </label>
 
-                            <label class="plan shadow-sm p-3 m-1 rounded d-flex d-md-block">
+
+                            <label class="plan shadow-sm p-3 m-1 rounded d-flex d-md-block position-relative">
                                 <input type="radio" name="plan" id="advanced"
                                     class="form-check-input plan-type d-none" value="month-advanced" />
-                                <img src="{{ asset('assets/reserve/assets/images/icon-advanced.svg') }}""
-                                    class="me-2 me-md-0 mb-0 mb-md-5 alt="Advanced" />
-                                <div>
-                                    <h5>Advanced</h5>
-                                    <h6>$12/mo</h6>
+                                <img src="{{ asset('assets/reserve/cartest.png') }}" class="thumbnail-img rounded"
+                                    alt="Advanced Thumbnail" />
+                                <div class="overlay-content">
+                                    <img src="{{ asset('assets/reserve/assets/images/icon-bmw.svg') }}"
+                                        class="icon-overlay" alt="Advanced Icon" />
+                                    <div class="text-overlay">
+                                        <h5>Advanced</h5>
+                                        <h6 class="m-y-on">$9/mo</h6>
+                                    </div>
                                 </div>
                             </label>
 
-                            <label class="plan shadow-sm p-3 m-1 rounded d-flex d-md-block">
+                            <label class="plan shadow-sm p-3 m-1 rounded d-flex d-md-block position-relative">
                                 <input type="radio" name="plan" id="pro"
                                     class="form-check-input plan-type d-none" value="month-pro" />
-                                <img src="{{ asset('assets/reserve/assets/images/icon-pro.svg') }}"
-                                    class="me-2 me-md-0 mb-0 mb-md-5" alt="Pro" />
-                                <div>
-                                    <h5>Pro</h5>
-                                    <h6>$20/mo</h6>
+                                <img src="{{ asset('assets/reserve/cartest.png') }}" class="thumbnail-img rounded"
+                                    alt="Advanced Thumbnail" />
+                                <div class="overlay-content">
+                                    <img src="{{ asset('assets/reserve/assets/images/icon-pro.svg') }}"
+                                        class="icon-overlay" alt="Pro Icon" />
+                                    <div class="text-overlay">
+                                        <h5>Pro</h5>
+                                        <h6 class="m-y-on">$9/mo</h6>
+                                    </div>
                                 </div>
 
                             </label>
 
-                            <label class="plan shadow-sm p-3 m-1 rounded d-flex d-md-block">
+                            <label class="plan shadow-sm p-3 m-1 rounded d-flex d-md-block position-relative">
                                 <input type="radio" name="plan" id="arcade"
                                     class="form-check-input plan-type d-none" value="month-arcade" />
-                                <img src="{{ asset('assets/reserve/assets/images/icon-arcade.svg') }}"
-                                    class="me-2 me-md-0 mb-0 mb-md-5" alt="Arcade" />
-                                <div>
-                                    <h5>Arcade</h5>
-                                    <h6 class="m-y-on">$9/mo</h6>
+                                <img src="{{ asset('assets/reserve/cartest.png') }}" class="thumbnail-img rounded"
+                                    alt="Arcade Thumbnail" />
+                                <div class="overlay-content">
+                                    <img src="{{ asset('assets/reserve/assets/images/icon-arcade.svg') }}"
+                                        class="icon-overlay" alt="Arcade Icon" />
+                                    <div class="text-overlay">
+                                        <h5>Arcade</h5>
+                                        <h6 class="m-y-on">$9/mo</h6>
+                                    </div>
                                 </div>
                             </label>
 
-                            <label class="plan shadow-sm p-3 m-1 rounded d-flex d-md-block">
+
+                            <label class="plan shadow-sm p-3 m-1 rounded d-flex d-md-block position-relative">
                                 <input type="radio" name="plan" id="advanced"
                                     class="form-check-input plan-type d-none" value="month-advanced" />
-                                <img src="{{ asset('assets/reserve/assets/images/icon-advanced.svg') }}""
-                                    class="me-2 me-md-0 mb-0 mb-md-5 alt="Advanced" />
-                                <div>
-                                    <h5>Advanced</h5>
-                                    <h6>$12/mo</h6>
+                                <img src="{{ asset('assets/reserve/cartest.png') }}" class="thumbnail-img rounded"
+                                    alt="Advanced Thumbnail" />
+                                <div class="overlay-content">
+                                    <img src="{{ asset('assets/reserve/assets/images/icon-bmw.svg') }}"
+                                        class="icon-overlay" alt="Advanced Icon" />
+                                    <div class="text-overlay">
+                                        <h5>Advanced</h5>
+                                        <h6 class="m-y-on">$9/mo</h6>
+                                    </div>
                                 </div>
                             </label>
 
-                            <label class="plan shadow-sm p-3 m-1 rounded d-flex d-md-block">
+                            <label class="plan shadow-sm p-3 m-1 rounded d-flex d-md-block position-relative">
                                 <input type="radio" name="plan" id="pro"
                                     class="form-check-input plan-type d-none" value="month-pro" />
-                                <img src="{{ asset('assets/reserve/assets/images/icon-pro.svg') }}"
-                                    class="me-2 me-md-0 mb-0 mb-md-5" alt="Pro" />
-                                <div>
-                                    <h5>Pro</h5>
-                                    <h6>$20/mo</h6>
+                                <img src="{{ asset('assets/reserve/cartest.png') }}" class="thumbnail-img rounded"
+                                    alt="Advanced Thumbnail" />
+                                <div class="overlay-content">
+                                    <img src="{{ asset('assets/reserve/assets/images/icon-pro.svg') }}"
+                                        class="icon-overlay" alt="Pro Icon" />
+                                    <div class="text-overlay">
+                                        <h5>Pro</h5>
+                                        <h6 class="m-y-on">$9/mo</h6>
+                                    </div>
                                 </div>
 
                             </label>
 
-                            <label class="plan shadow-sm p-3 m-1 rounded d-flex d-md-block">
+                            <label class="plan shadow-sm p-3 m-1 rounded d-flex d-md-block position-relative">
                                 <input type="radio" name="plan" id="arcade"
                                     class="form-check-input plan-type d-none" value="month-arcade" />
-                                <img src="{{ asset('assets/reserve/assets/images/icon-arcade.svg') }}"
-                                    class="me-2 me-md-0 mb-0 mb-md-5" alt="Arcade" />
-                                <div>
-                                    <h5>Arcade</h5>
-                                    <h6 class="m-y-on">$9/mo</h6>
+                                <img src="{{ asset('assets/reserve/cartest.png') }}" class="thumbnail-img rounded"
+                                    alt="Arcade Thumbnail" />
+                                <div class="overlay-content">
+                                    <img src="{{ asset('assets/reserve/assets/images/icon-arcade.svg') }}"
+                                        class="icon-overlay" alt="Arcade Icon" />
+                                    <div class="text-overlay">
+                                        <h5>Arcade</h5>
+                                        <h6 class="m-y-on">$9/mo</h6>
+                                    </div>
                                 </div>
                             </label>
 
-                            <label class="plan shadow-sm p-3 m-1 rounded d-flex d-md-block">
+
+                            <label class="plan shadow-sm p-3 m-1 rounded d-flex d-md-block position-relative">
                                 <input type="radio" name="plan" id="advanced"
                                     class="form-check-input plan-type d-none" value="month-advanced" />
-                                <img src="{{ asset('assets/reserve/assets/images/icon-advanced.svg') }}""
-                                    class="me-2 me-md-0 mb-0 mb-md-5 alt="Advanced" />
-                                <div>
-                                    <h5>Advanced</h5>
-                                    <h6>$12/mo</h6>
+                                <img src="{{ asset('assets/reserve/cartest.png') }}" class="thumbnail-img rounded"
+                                    alt="Advanced Thumbnail" />
+                                <div class="overlay-content">
+                                    <img src="{{ asset('assets/reserve/assets/images/icon-bmw.svg') }}"
+                                        class="icon-overlay" alt="Advanced Icon" />
+                                    <div class="text-overlay">
+                                        <h5>Advanced</h5>
+                                        <h6 class="m-y-on">$9/mo</h6>
+                                    </div>
                                 </div>
                             </label>
 
-                            <label class="plan shadow-sm p-3 m-1 rounded d-flex d-md-block">
+                            <label class="plan shadow-sm p-3 m-1 rounded d-flex d-md-block position-relative">
                                 <input type="radio" name="plan" id="pro"
                                     class="form-check-input plan-type d-none" value="month-pro" />
-                                <img src="{{ asset('assets/reserve/assets/images/icon-pro.svg') }}"
-                                    class="me-2 me-md-0 mb-0 mb-md-5" alt="Pro" />
-                                <div>
-                                    <h5>Pro</h5>
-                                    <h6>$20/mo</h6>
+                                <img src="{{ asset('assets/reserve/cartest.png') }}" class="thumbnail-img rounded"
+                                    alt="Advanced Thumbnail" />
+                                <div class="overlay-content">
+                                    <img src="{{ asset('assets/reserve/assets/images/icon-pro.svg') }}"
+                                        class="icon-overlay" alt="Pro Icon" />
+                                    <div class="text-overlay">
+                                        <h5>Pro</h5>
+                                        <h6 class="m-y-on">$9/mo</h6>
+                                    </div>
                                 </div>
 
                             </label>
-                            <label class="plan shadow-sm p-3 m-1 rounded d-flex d-md-block">
+
+                            <label class="plan shadow-sm p-3 m-1 rounded d-flex d-md-block position-relative">
                                 <input type="radio" name="plan" id="arcade"
                                     class="form-check-input plan-type d-none" value="month-arcade" />
-                                <img src="{{ asset('assets/reserve/assets/images/icon-arcade.svg') }}"
-                                    class="me-2 me-md-0 mb-0 mb-md-5" alt="Arcade" />
-                                <div>
-                                    <h5>Arcade</h5>
-                                    <h6 class="m-y-on">$9/mo</h6>
+                                <img src="{{ asset('assets/reserve/cartest.png') }}" class="thumbnail-img rounded"
+                                    alt="Arcade Thumbnail" />
+                                <div class="overlay-content">
+                                    <img src="{{ asset('assets/reserve/assets/images/icon-arcade.svg') }}"
+                                        class="icon-overlay" alt="Arcade Icon" />
+                                    <div class="text-overlay">
+                                        <h5>Arcade</h5>
+                                        <h6 class="m-y-on">$9/mo</h6>
+                                    </div>
                                 </div>
                             </label>
 
-                            <label class="plan shadow-sm p-3 m-1 rounded d-flex d-md-block">
+
+                            <label class="plan shadow-sm p-3 m-1 rounded d-flex d-md-block position-relative">
                                 <input type="radio" name="plan" id="advanced"
                                     class="form-check-input plan-type d-none" value="month-advanced" />
-                                <img src="{{ asset('assets/reserve/assets/images/icon-advanced.svg') }}""
-                                    class="me-2 me-md-0 mb-0 mb-md-5 alt="Advanced" />
-                                <div>
-                                    <h5>Advanced</h5>
-                                    <h6>$12/mo</h6>
+                                <img src="{{ asset('assets/reserve/cartest.png') }}" class="thumbnail-img rounded"
+                                    alt="Advanced Thumbnail" />
+                                <div class="overlay-content">
+                                    <img src="{{ asset('assets/reserve/assets/images/icon-bmw.svg') }}"
+                                        class="icon-overlay" alt="Advanced Icon" />
+                                    <div class="text-overlay">
+                                        <h5>Advanced</h5>
+                                        <h6 class="m-y-on">$9/mo</h6>
+                                    </div>
                                 </div>
                             </label>
 
-                            <label class="plan shadow-sm p-3 m-1 rounded d-flex d-md-block">
+                            <label class="plan shadow-sm p-3 m-1 rounded d-flex d-md-block position-relative">
                                 <input type="radio" name="plan" id="pro"
                                     class="form-check-input plan-type d-none" value="month-pro" />
-                                <img src="{{ asset('assets/reserve/assets/images/icon-pro.svg') }}"
-                                    class="me-2 me-md-0 mb-0 mb-md-5" alt="Pro" />
-                                <div>
-                                    <h5>Pro</h5>
-                                    <h6>$20/mo</h6>
+                                <img src="{{ asset('assets/reserve/cartest.png') }}" class="thumbnail-img rounded"
+                                    alt="Advanced Thumbnail" />
+                                <div class="overlay-content">
+                                    <img src="{{ asset('assets/reserve/assets/images/icon-pro.svg') }}"
+                                        class="icon-overlay" alt="Pro Icon" />
+                                    <div class="text-overlay">
+                                        <h5>Pro</h5>
+                                        <h6 class="m-y-on">$9/mo</h6>
+                                    </div>
                                 </div>
 
                             </label>
 
-                            <label class="plan shadow-sm p-3 m-1 rounded d-flex d-md-block">
-                                <input type="radio" name="plan" id="arcade"
-                                    class="form-check-input plan-type d-none" value="month-arcade" />
-                                <img src="{{ asset('assets/reserve/assets/images/icon-arcade.svg') }}"
-                                    class="me-2 me-md-0 mb-0 mb-md-5" alt="Arcade" />
-                                <div>
-                                    <h5>Arcade</h5>
-                                    <h6 class="m-y-on">$9/mo</h6>
-                                </div>
-                            </label>
-
-                            <label class="plan shadow-sm p-3 m-1 rounded d-flex d-md-block">
-                                <input type="radio" name="plan" id="advanced"
-                                    class="form-check-input plan-type d-none" value="month-advanced" />
-                                <img src="{{ asset('assets/reserve/assets/images/icon-advanced.svg') }}""
-                                    class="me-2 me-md-0 mb-0 mb-md-5 alt="Advanced" />
-                                <div>
-                                    <h5>Advanced</h5>
-                                    <h6>$12/mo</h6>
-                                </div>
-                            </label>
-
-                            <label class="plan shadow-sm p-3 m-1 rounded d-flex d-md-block">
-                                <input type="radio" name="plan" id="pro"
-                                    class="form-check-input plan-type d-none" value="month-pro" />
-                                <img src="{{ asset('assets/reserve/assets/images/icon-pro.svg') }}"
-                                    class="me-2 me-md-0 mb-0 mb-md-5" alt="Pro" />
-                                <div>
-                                    <h5>Pro</h5>
-                                    <h6>$20/mo</h6>
-                                </div>
-
-                            </label>
-
-                            <label class="plan shadow-sm p-3 m-1 rounded d-flex d-md-block">
-                                <input type="radio" name="plan" id="arcade"
-                                    class="form-check-input plan-type d-none" value="month-arcade" />
-                                <img src="{{ asset('assets/reserve/assets/images/icon-arcade.svg') }}"
-                                    class="me-2 me-md-0 mb-0 mb-md-5" alt="Arcade" />
-                                <div>
-                                    <h5>Arcade</h5>
-                                    <h6 class="m-y-on">$9/mo</h6>
-                                </div>
-                            </label>
-
-                            <label class="plan shadow-sm p-3 m-1 rounded d-flex d-md-block">
-                                <input type="radio" name="plan" id="advanced"
-                                    class="form-check-input plan-type d-none" value="month-advanced" />
-                                <img src="{{ asset('assets/reserve/assets/images/icon-advanced.svg') }}""
-                                    class="me-2 me-md-0 mb-0 mb-md-5 alt="Advanced" />
-                                <div>
-                                    <h5>Advanced</h5>
-                                    <h6>$12/mo</h6>
-                                </div>
-                            </label>
-
-                            <label class="plan shadow-sm p-3 m-1 rounded d-flex d-md-block">
-                                <input type="radio" name="plan" id="pro"
-                                    class="form-check-input plan-type d-none" value="month-pro" />
-                                <img src="{{ asset('assets/reserve/assets/images/icon-pro.svg') }}"
-                                    class="me-2 me-md-0 mb-0 mb-md-5" alt="Pro" />
-                                <div>
-                                    <h5>Pro</h5>
-                                    <h6>$20/mo</h6>
-                                </div>
-
-                            </label>
-                            <label class="plan shadow-sm p-3 m-1 rounded d-flex d-md-block">
-                                <input type="radio" name="plan" id="arcade"
-                                    class="form-check-input plan-type d-none" value="month-arcade" />
-                                <img src="{{ asset('assets/reserve/assets/images/icon-arcade.svg') }}"
-                                    class="me-2 me-md-0 mb-0 mb-md-5" alt="Arcade" />
-                                <div>
-                                    <h5>Arcade</h5>
-                                    <h6 class="m-y-on">$9/mo</h6>
-                                </div>
-                            </label>
-
-                            <label class="plan shadow-sm p-3 m-1 rounded d-flex d-md-block">
-                                <input type="radio" name="plan" id="advanced"
-                                    class="form-check-input plan-type d-none" value="month-advanced" />
-                                <img src="{{ asset('assets/reserve/assets/images/icon-advanced.svg') }}""
-                                    class="me-2 me-md-0 mb-0 mb-md-5 alt="Advanced" />
-                                <div>
-                                    <h5>Advanced</h5>
-                                    <h6>$12/mo</h6>
-                                </div>
-                            </label>
-
-                            <label class="plan shadow-sm p-3 m-1 rounded d-flex d-md-block">
-                                <input type="radio" name="plan" id="pro"
-                                    class="form-check-input plan-type d-none" value="month-pro" />
-                                <img src="{{ asset('assets/reserve/assets/images/icon-pro.svg') }}"
-                                    class="me-2 me-md-0 mb-0 mb-md-5" alt="Pro" />
-                                <div>
-                                    <h5>Pro</h5>
-                                    <h6>$20/mo</h6>
-                                </div>
-
-                            </label>
-
-                            <label class="plan shadow-sm p-3 m-1 rounded d-flex d-md-block">
-                                <input type="radio" name="plan" id="arcade"
-                                    class="form-check-input plan-type d-none" value="month-arcade" />
-                                <img src="{{ asset('assets/reserve/assets/images/icon-arcade.svg') }}"
-                                    class="me-2 me-md-0 mb-0 mb-md-5" alt="Arcade" />
-                                <div>
-                                    <h5>Arcade</h5>
-                                    <h6 class="m-y-on">$9/mo</h6>
-                                </div>
-                            </label>
-
-                            <label class="plan shadow-sm p-3 m-1 rounded d-flex d-md-block">
-                                <input type="radio" name="plan" id="advanced"
-                                    class="form-check-input plan-type d-none" value="month-advanced" />
-                                <img src="{{ asset('assets/reserve/assets/images/icon-advanced.svg') }}""
-                                    class="me-2 me-md-0 mb-0 mb-md-5 alt="Advanced" />
-                                <div>
-                                    <h5>Advanced</h5>
-                                    <h6>$12/mo</h6>
-                                </div>
-                            </label>
-
-                            <label class="plan shadow-sm p-3 m-1 rounded d-flex d-md-block">
-                                <input type="radio" name="plan" id="pro"
-                                    class="form-check-input plan-type d-none" value="month-pro" />
-                                <img src="{{ asset('assets/reserve/assets/images/icon-pro.svg') }}"
-                                    class="me-2 me-md-0 mb-0 mb-md-5" alt="Pro" />
-                                <div>
-                                    <h5>Pro</h5>
-                                    <h6>$20/mo</h6>
-                                </div>
-
-                            </label>
-
-                            <label class="plan shadow-sm p-3 m-1 rounded d-flex d-md-block">
-                                <input type="radio" name="plan" id="arcade"
-                                    class="form-check-input plan-type d-none" value="month-arcade" />
-                                <img src="{{ asset('assets/reserve/assets/images/icon-arcade.svg') }}"
-                                    class="me-2 me-md-0 mb-0 mb-md-5" alt="Arcade" />
-                                <div>
-                                    <h5>Arcade</h5>
-                                    <h6 class="m-y-on">$9/mo</h6>
-                                </div>
-                            </label>
-
-                            <label class="plan shadow-sm p-3 m-1 rounded d-flex d-md-block">
-                                <input type="radio" name="plan" id="advanced"
-                                    class="form-check-input plan-type d-none" value="month-advanced" />
-                                <img src="{{ asset('assets/reserve/assets/images/icon-advanced.svg') }}""
-                                    class="me-2 me-md-0 mb-0 mb-md-5 alt="Advanced" />
-                                <div>
-                                    <h5>Advanced</h5>
-                                    <h6>$12/mo</h6>
-                                </div>
-                            </label>
-
-                            <label class="plan shadow-sm p-3 m-1 rounded d-flex d-md-block">
-                                <input type="radio" name="plan" id="pro"
-                                    class="form-check-input plan-type d-none" value="month-pro" />
-                                <img src="{{ asset('assets/reserve/assets/images/icon-pro.svg') }}"
-                                    class="me-2 me-md-0 mb-0 mb-md-5" alt="Pro" />
-                                <div>
-                                    <h5>Pro</h5>
-                                    <h6>$20/mo</h6>
-                                </div>
-
-                            </label>
-
+                            
                         </div>
 
-                        <div class="bad-feedback d-none">Please choose a plan.</div>
-                        
-                        <div class="month-year mt-2 d-flex justify-content-center align-items-center rounded p-2">
-                            <div class="form-check form-switch ms-2 me-2">
-                                <input class="form-check-input" type="checkbox" id="sub" />
-                                <label class="form-check-label" for="sub"></label>
-                            </div>
-                        </div>
+                        <div class="bad-feedback d-none">Please choose a car.</div>
+
                     </div>
                     <!-- End plan-step -->
 
@@ -562,7 +481,7 @@
                     <!-- Start addons step -->
                     <div class="step addons-step p-4">
                         <header>
-                            <h1 class="">Pick add-on</h1>
+                            <h1 >Pick add-on</h1>
                             <p class="lead">Add-ons help enhance your gaming experience.</p>
                         </header>
                         <div class="addons d-flex gap-2 flex-column" id="monthly-addons">
@@ -640,7 +559,7 @@
                     <!-- Start summary step -->
                     <div class="step summary-step p-4 d-none">
                         <header>
-                            <h1 class="">Finishing up</h1>
+                            <h1 >Finishing up</h1>
                             <p class="lead">Double-check everything looks OK before confirming.</p>
                         </header>
                         <div class="summary d-flex gap-2 flex-column">
@@ -667,7 +586,7 @@
                         <img class="w-25 mb-4" src="{{ asset('assets/reserve/assets/images/icon-thank-you.svg') }}"
                             alt="" />
 
-                        <h1 class="">Thank You</h1>
+                        <h1 >Thank You</h1>
                         <p class="text-center lead">
                             Thanks for confirming your subscription! We hope you have fun using our platform. If you
                             ever need support, please feel free to email us at support@loremgaming.com.
