@@ -15,9 +15,12 @@ Route::get('/auth/login', Login::class)->name('auth.login');
 
 
 use App\Livewire\Counter;
-Route::get('/counter', Counter::class);
+use App\Livewire\Reservation\ReserveCarForm;
+
 
 Route::get('/reservations/', [ReservationController::class, 'show'])->name('reservations.show');
+
+Route::get('/reservations2', ReserveCarForm::class);
 
 
 use App\Imports\CarImport;

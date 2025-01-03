@@ -89,7 +89,7 @@ class CarModel extends Model
     // رابطه چندشکلی برای تصاویر
     public function images()
     {
-        return $this->morphMany(Image::class, 'imageable');
+        return $this->morphOne(Image::class, 'imageable');
     }
 
     // دسترسی‌ برای آیکون برند

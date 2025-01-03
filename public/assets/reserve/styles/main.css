@@ -31,6 +31,7 @@ body {
   background-color: hsl(0, 0%, 100%);
   width: min(100% - 10px, 1000px);
   border-radius: 20px;
+  top:10px;
 }
 
 .step header h1 {
@@ -58,14 +59,17 @@ body {
   -moz-transition: border-color 0.3s;
   -ms-transition: border-color 0.3s;
   -o-transition: border-color 0.3s;
+  border-radius: 5px;
 }
 .plan-step .plans .plan h5 {
-  color: hsl(213, 96%, 18%);
+  color: hsl(0, 0%, 95%);
   font-weight: bold;
 }
 @media (max-width: 767px) {
   .plan-step .plans .plan {
     flex: 1 0 0;
+    width: 100%;
+    padding: 5rem !important;
   }
 }
 .plan-step .plans .plan h6:nth-of-type(1) {
@@ -76,11 +80,14 @@ body {
 }
 .plan-step .plans .plan:hover {
   border-color: hsl(213, 96%, 18%);
-
+  background-color: hsl(213, 96%, 18%);
 }
 .plan-step .plans .plan.checked {
   background-color: hsl(217, 100%, 97%);
   border: 1px solid hsl(243, 100%, 62%);
+}
+.plan-step .plans .plan.checked img {
+  transform: scale(1.5); /* بزرگ کردن تصویر در هنگام Hover روی Label */
 }
 
 .plan-step .month-year {
@@ -188,7 +195,7 @@ aside .sidebar {
     -ms-border-radius: 1rem;
     -o-border-radius: 1rem;
     position: relative;
-    top: 20%;
+    /* top: 20%; */
   }
   form .next-step {
     position: fixed;
@@ -199,6 +206,7 @@ aside .sidebar {
     right: 0%;
     left: 0%;
     padding-inline: 15px;
+    z-index: 3;
   }
 }
 .summary-step .summary {
@@ -277,6 +285,7 @@ label[for=darkmode] {
 .dark-mode .wrapper {
   color: hsl(232, 17%, 83%);
   background-color: #2b3035;
+  top: 10px;
 }
 @media (max-width: 767px) {
   .dark-mode .wrapper {
@@ -347,6 +356,7 @@ label[for=darkmode] {
 }/*# sourceMappingURL=main.css.map */
 
 @media (max-width: 600px) {
+  
   .step-1 {
     margin-bottom: 350px;
   }
@@ -360,7 +370,7 @@ label[for=darkmode] {
 }
 
 #month-plan{
-    padding: 10px;
+    padding: 5px;
     max-height: 400px;
     overflow: auto;
     border-radius: 10px;
@@ -370,14 +380,15 @@ label[for=darkmode] {
 
 
 .plan {
-  width: 250px; /* تنظیم عرض برای هر گزینه */
-  height: 300px; /* تنظیم ارتفاع */
-  overflow: hidden;
+  /* height: 300px; تنظیم ارتفاع */
+  /* overflow: hidden; */
+  margin: 5px 0px ;
 }
 
+
 .thumbnail-img {
-  width: 100%;
-  height: 100%;
+  /* width: 100%; */
+  /* height: 100%; */
   object-fit: cover; /* حفظ تناسب عکس */
   position: absolute;
   top: 0;
@@ -386,23 +397,15 @@ label[for=darkmode] {
 }
 
 .overlay-content {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  z-index: 2;
+  justify-content: end;
   color: #fff;
-  background: rgba(0, 0, 0, 0.5); /* مقدار پیش‌فرض پس‌زمینه */
-  text-align: center;
-  transition: background 0.3s ease; /* زمان و نوع انیمیشن */
+  /* background: rgba(0, 0, 0, 0.5); مقدار پیش‌فرض پس‌زمینه */
+  /* text-align: center; */
+  /* transition: background 0.3s ease; زمان و نوع انیمیشن */
 }
 .overlay-content:hover {
-  background: rgba(0, 0, 0, 0.29); /* پس‌زمینه نیمه‌شفاف برای متن */
+  /* background: rgba(0, 0, 0, 0.29); پس‌زمینه نیمه‌شفاف برای متن */
 }
 
 .icon-overlay {
@@ -424,4 +427,116 @@ label[for=darkmode] {
 
 .overlay-content:hover .icon-overlay {
   transform: scale(1.2); /* بزرگ‌تر کردن آیکون به 120% اندازه اصلی */
+}
+
+.plan img {
+  transition: transform 0.3s ease-in-out; /* ایجاد انیمیشن نرم */
+}
+
+.plan:hover img {
+  transform: scale(1.3); /* بزرگ کردن تصویر در هنگام Hover روی Label */
+}
+
+
+.car-box-container:hover {
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.car-info {
+  flex: 1;
+  padding: 10px;
+}
+
+.car-image img {
+  width: 400px;
+  height: auto;
+  object-fit: cover;
+}
+
+.step{
+  top: 5px;
+}
+
+/* ریسپانسیو */
+@media (max-width: 768px) {
+  .car-box-container {
+      flex-direction: column;
+      text-align: center;
+  }
+
+  .car-image img {
+      width: 100%;
+      max-width: 300px;
+      margin-bottom: 10px;
+  }
+}
+
+/* Styles for Features */
+.features {
+  margin-top: 10px;
+}
+
+.feature-item {
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  margin-right: 15px;
+  margin-bottom: 10px;
+}
+
+.feature-item i {
+  font-size: 18px;
+}
+
+.car-info h5 {
+  font-weight: bold;
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.car-info h6 {
+  font-size: 14px;
+}
+
+.badge {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 6px;
+  border: 1px solid transparent;
+  min-width: 10px;
+  line-height: 1;
+  color: #fff;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  border-radius: 99999px
+}
+
+.badge.badge-default {
+  background-color: #B0BEC5
+}
+
+.badge.badge-primary {
+  background-color: #2196F3
+}
+
+.badge.badge-secondary {
+  background-color: #323a45
+}
+
+.badge.badge-success {
+  background-color: #64DD17
+}
+
+.badge.badge-warning {
+  background-color: #FFD600
+}
+
+.badge.badge-info {
+  background-color: #29B6F6
+}
+
+.badge.badge-danger {
+  background-color: #ef1c1c
 }
