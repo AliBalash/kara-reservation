@@ -8,30 +8,46 @@ use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
 class DiscountCodesImport implements ToModel
 {
-  
-
     public function model(array $row)
     {
-
-        // Agar name ya phone NULL bashe, skip kon
         if (empty($row[0]) || empty($row[1])) {
             return null;
         }
 
-        // Check mikonim ke phone tekrari nabashe
-        if (DiscountCode::where('phone', $row[1])->exists()) {
+        $formattedPhone = $this->fixPhoneNumber($row[1]);
+
+        if (DiscountCode::where('phone', $formattedPhone)->exists()) {
             return null;
         }
+
         return new DiscountCode([
             'name' => $row[0],
-            'phone' => $this->fixPhoneNumber($row[1]), // Taghir dadan shomare
+            'phone' => $formattedPhone, // Shomare tabdil shode
             'code' => DiscountCode::generateCode(),
-            'discount_percentage' => 5,
+            'discount_percentage' => 10,
         ]);
     }
 
     private function fixPhoneNumber($phone)
     {
-        return preg_replace('/^98/', '0', $phone); // Taghir format
+        // Pak kardan space ya karakter haye ezafe
+        $phone = preg_replace('/\D/', '', $phone);
+
+        // Code haye keshvar hayi ke darim
+        $countryCodes = [
+            '98'  => '+98',  // Iran
+            '965' => '+965', // Kuwait
+            '90'  => '+90',  // Turkey
+            '971' => '+971', // UAE
+        ];
+
+        foreach ($countryCodes as $prefix => $formattedPrefix) {
+            if (strpos($phone, $prefix) === 0) {
+                return $formattedPrefix . substr($phone, strlen($prefix));
+            }
+        }
+
+        // Agar code keshvar nadasht, shomare ra bar asas Iran (+98) gharar mide
+        return '+98' . ltrim($phone, '0');
     }
 }

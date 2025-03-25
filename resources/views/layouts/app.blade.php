@@ -4,15 +4,18 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('assets/reserve/assets/images/favicon-32x32.png') }}" />
+    <link rel="icon" type="image/png" sizes="32x32"
+        href="{{ asset('assets/reserve/assets/images/favicon-32x32.png') }}" />
     <link rel="stylesheet" href="{{ asset('assets/reserve/styles/bootstrap.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/reserve/styles/main.css') }}" />
-    <title>Frontend Mentor | Multi-step form</title>
+
+    <title>Registery Discount Code</title>
     <style>
         .attribution {
             font-size: 11px;
             text-align: center;
         }
+
         .attribution a {
             color: hsl(228, 45%, 44%);
         }

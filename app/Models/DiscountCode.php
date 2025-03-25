@@ -9,7 +9,7 @@ class DiscountCode extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'phone', 'code', 'discount_percentage' , 'registery_at'];
+    protected $fillable = ['name', 'phone', 'code', 'discount_percentage' , 'contacted' , 'registery_at'];
 
     public static function generateCode(): string
     {

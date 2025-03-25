@@ -14,6 +14,8 @@ return new class extends Migration {
             $table->string('code')->unique();
             $table->integer('discount_percentage');
             $table->timestamp('registery_at')->nullable();
+            $table->boolean('contacted')->default(false); // True yani tamas gerefte shode, false yani hanuz tamas gerefte nashode
+
             $table->timestamps();
         });
     }
