@@ -29,9 +29,9 @@ class ReserveCarForm extends Component
         $this->cars = Car::all();
     }
 
-    public function selectCar(Car $car)
+    public function selectCar($carId)
     {
-        $this->selectedCar = $car;
+        $this->selectedCar = Car::find($carId);
     }
 
     public function updatedSelectedBrand($value)

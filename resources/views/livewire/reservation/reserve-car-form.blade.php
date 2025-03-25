@@ -146,7 +146,8 @@
                     <div class="form-check cars col-12" id="month-car">
                         @foreach ($cars as $car)
                             <label class="col-lg-12 car car-box {{ $selectedCar?->id === $car->id ? 'checked' : '' }}"
-                                wire:click="selectCar({{ $car }})">
+                                wire:click="selectCar({{ $car->id }})"
+                                wire:key="car-{{ $car->id }}">
                                 <!-- Radio input -->
                                 <input type="radio" name="carId" id="car-{{ $car->id }}"
                                     class="form-check-input car-type d-none" value="{{ $car->id }}" />
@@ -175,7 +176,7 @@
                                         <div class="row g-3">
                                             <!-- Pricing Table -->
                                             <div class="col-12 col-sm-12 col-md-4 col-lg-6">
-                                                <table class="table table-sm mb-0 styled-table " wire:ignore.self>
+                                                <table class="table table-sm mb-0 styled-table " >
                                                     <tbody>
                                                         <tr>
                                                             <th scope="row">Daily</th>

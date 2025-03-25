@@ -333,21 +333,24 @@ function isValidMessengerPhone(phoneField) {
 
   return validMessengerPhone;
 }
-function validateCars(btns = monthlyCarBtns) {
-  let validCar = true;
+
+function validateCars(btns = document.querySelectorAll(".car-type")) {
+  let validCar = false; // مقدار پیش‌فرض اشتباه باشد
   let feedback = document.querySelector(".bad-feedback-car");
-  let checkedCount = 0;
+  if (!feedback) {
+    console.error("Element with class 'bad-feedback-car' not found!");
+    return false;
+  }
+  // بررسی اینکه حداقل یک ماشین انتخاب شده باشد
   btns.forEach((inp) => {
     if (inp.checked) {
-      checkedCount++;
+      validCar = true;
     }
-  })
-  if (checkedCount == 0) {
-    feedback.classList.remove("d-none")
-    validCar = false
-  }
-  else {
-    feedback.classList.add("d-none")
+  });
+  if (!validCar) {
+    feedback.classList.remove("d-none"); // نمایش پیام خطا
+  } else {
+    feedback.classList.add("d-none"); // مخفی کردن پیام خطا
   }
   return validCar;
 }
@@ -408,106 +411,4 @@ function isValidReturnLocation(locationField) {
   }
   return validLocation;
 }
-
-
-
-// choose add-on services
-// function chooseAddons() {
-
-//   addonChecks.forEach((check) => {
-//     check.addEventListener("click", function () {
-//       if (check.checked) {
-//         addons(check);
-//         check.parentElement.parentElement.classList.add("checkAddon");
-//       } else {
-//         check.parentElement.parentElement.classList.remove("checkAddon");
-//         removeAddon(check.value);
-//       }
-//     });
-//   });
-//   //   addonss.forEach((addon) => {
-//   //   addon.addEventListener("click", function () {
-//   //     const addonChecked = addon.querySelector(".form-check-input");
-//   //     if (addonChecked.checked) {
-//   //       addonChecked.checked = false;
-//   //       this.classList.remove("checkAddon");
-//   //       removeAddon(addonChecked.value);
-//   //     } else {
-//   //       addonChecked.checked = true;
-//   //       this.classList.add("checkAddon");
-//   //       addons(addonChecked);
-//   //     }
-//   //   });
-//   // });
-// }
-
-// // add Addons to summary
-// function addons(check) {
-//   let [dur, type] = check.value.split("-");
-//   let addonName = type.toLowerCase();
-//   let addonDur = dur == "month" ? "Month" : "Year";
-//   let addonPrice = addonData[addonName][dur];
-//   let addonNamePrice = {};
-//   addonNamePrice.addonName = addonName;
-//   addonNamePrice.addonPrice = addonPrice;
-//   addonNamePrice.addonDur = addonDur;
-//   addonsPrices.push(addonNamePrice);
-//   // update Prices Map
-//   addonCarPrices.set("addons", addonsPrices);
-
-//   const summaryAddonDiv = document.querySelector(".summary-step .summary");
-//   const addonDiv = document.createElement("div");
-//   const addonNameSp = document.createElement("span");
-//   const addonPriceSp = document.createElement("span");
-//   addonDiv.classList.add("addon", "p-3", "mb-2", "mb-md-2", "d-flex", "align-items-center");
-//   addonDiv.id = check.value;
-
-//   addonNameSp.classList.add("me-auto", "addon-name");
-//   addonPriceSp.classList.add("ms-auto", "addon-price");
-//   addonNameSp.innerHTML = addonData[addonName]["name"];
-//   addonPriceSp.innerHTML = `+$${addonPrice}/${addonDur}`;
-//   addonDiv.append(addonNameSp, addonPriceSp);
-//   summaryAddonDiv.append(addonDiv);
-// }
-// function removeAddon(id) {
-
-//   document.getElementById(id).remove();
-
-//   let [, name] = id.split("-");
-//   let addonName = name.toLowerCase();
-
-//   addonCarPrices.get("addons").forEach((element, ind, arr) => {
-//     if (element.addonName === addonName) {
-//       arr.splice(ind, 1);
-//     }
-//   });
-// }
-
-// function totalCalc() {
-
-//   const totalSummary = document.querySelector(".summary-step");
-//   const totalDiv = document.createElement("div");
-//   totalDiv.classList.add("total", "p-3", "mb-2", "mb-md-3", "d-flex", "align-items-center");
-//   const totalDur = document.createElement("span");
-//   const totalPrice = document.createElement("span");
-//   totalDur.classList.add("me-auto", "total-dur");
-//   totalPrice.classList.add("ms-auto", "total-price");
-//   totalDur.innerHTML = `Total Per (${addonCarPrices.get("carType")})`;
-//   totalPrice.innerHTML = doCalc();
-//   totalDiv.append(totalDur, totalPrice);
-//   totalSummary.append(totalDiv);
-// }
-
-// function doCalc() {
-//   let carPrice = addonCarPrices.get("carPrice");
-//   let addonsPrices = 0;
-
-//   if (addonCarPrices.has("addons")) {
-//     addonsPrices = addonCarPrices.get("addons").reduce((sum, curr) => {
-//       return sum + curr.addonPrice;
-//     }, 0);
-//   }
-//   return `${carPrice + addonsPrices}/${addonCarPrices.get("carType")}`;
-// }
-
 
