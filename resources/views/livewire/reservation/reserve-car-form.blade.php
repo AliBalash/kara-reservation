@@ -49,22 +49,26 @@
                         <select id="pickup_location" class="form-select" name="pickup_location"
                             wire:model="pickup_location">
                             <option value="">Location</option>
-                            <option value="امارات/دبی/میدان ساعت/شعبه مرکزی">امارات/دبی/میدان ساعت/شعبه مرکزی</option>
-                            <option value="امارات/دبی/فرودگاه دبی/ترمینال 1">امارات/دبی/فرودگاه دبی/ترمینال 1</option>
-                            <option value="امارات/دبی/فرودگاه دبی/ترمینال 2">امارات/دبی/فرودگاه دبی/ترمینال 2</option>
-                            <option value="امارات/دبی/فرودگاه دبی/ترمینال 3">امارات/دبی/فرودگاه دبی/ترمینال 3</option>
-                            <option value="امارات/دبی/مرکز شهر">امارات/دبی/مرکز شهر</option>
-                            <option value="امارات/دبی/جمیرا ۱.۲.۳">امارات/دبی/جمیرا ۱.۲.۳</option>
-                            <option value="امارات/دبی/پالم">امارات/دبی/پالم</option>
-                            <option value="امارات/دبی/Damac Hills">امارات/دبی/Damac Hills</option>
-                            <option value="امارات/دبی/JVC">امارات/دبی/JVC</option>
-                            <option value="امارات/دبی/JLT">امارات/دبی/JLT</option>
-                            <option value="امارات/دبی/مارینا">امارات/دبی/مارینا</option>
-                            <option value="امارات/دبی/JBR">امارات/دبی/JBR</option>
-                            <option value="امارات/امارت دبی/جبل علی – ابن بطوطه – حتا و…">امارات/امارت دبی/جبل علی – ابن
-                                بطوطه – حتا و…</option>
-                            <option value="امارات / فرودگاه شارجه">امارات / فرودگاه شارجه</option>
-                            <option value="امارات / فرودگاه ابوظبی">امارات / فرودگاه ابوظبی</option>
+                            <option value="UAE/Dubai/Clock Tower/Main Branch">UAE/Dubai/Clock Tower/Main Branch</option>
+                            <option value="UAE/Dubai/Dubai Airport/Terminal 1">UAE/Dubai/Dubai Airport/Terminal 1
+                            </option>
+                            <option value="UAE/Dubai/Dubai Airport/Terminal 2">UAE/Dubai/Dubai Airport/Terminal 2
+                            </option>
+                            <option value="UAE/Dubai/Dubai Airport/Terminal 3">UAE/Dubai/Dubai Airport/Terminal 3
+                            </option>
+                            <option value="UAE/Dubai/Downtown">UAE/Dubai/Downtown</option>
+                            <option value="UAE/Dubai/Jumeirah 1, 2, 3">UAE/Dubai/Jumeirah 1, 2, 3</option>
+                            <option value="UAE/Dubai/Palm">UAE/Dubai/Palm</option>
+                            <option value="UAE/Dubai/Damac Hills">UAE/Dubai/Damac Hills</option>
+                            <option value="UAE/Dubai/JVC">UAE/Dubai/JVC</option>
+                            <option value="UAE/Dubai/JLT">UAE/Dubai/JLT</option>
+                            <option value="UAE/Dubai/Marina">UAE/Dubai/Marina</option>
+                            <option value="UAE/Dubai/JBR">UAE/Dubai/JBR</option>
+                            <option value="UAE/Dubai/Jebel Ali – Ibn Battuta – Hatta & more">UAE/Dubai/Jebel Ali – Ibn
+                                Battuta – Hatta & more</option>
+                            <option value="UAE/Sharjah Airport">UAE/Sharjah Airport</option>
+                            <option value="UAE/Abu Dhabi Airport">UAE/Abu Dhabi Airport</option>
+
 
                         </select>
                         <div class="invalid-feedback">Please select a valid Pickup Location.</div>
@@ -75,22 +79,26 @@
                         <select id="return_location" class="form-select" name="return_location"
                             wire:model="return_location">
                             <option value="">Location</option>
-                            <option value="امارات/دبی/میدان ساعت/شعبه مرکزی">امارات/دبی/میدان ساعت/شعبه مرکزی</option>
-                            <option value="امارات/دبی/فرودگاه دبی/ترمینال 1">امارات/دبی/فرودگاه دبی/ترمینال 1</option>
-                            <option value="امارات/دبی/فرودگاه دبی/ترمینال 2">امارات/دبی/فرودگاه دبی/ترمینال 2</option>
-                            <option value="امارات/دبی/فرودگاه دبی/ترمینال 3">امارات/دبی/فرودگاه دبی/ترمینال 3</option>
-                            <option value="امارات/دبی/مرکز شهر">امارات/دبی/مرکز شهر</option>
-                            <option value="امارات/دبی/جمیرا ۱.۲.۳">امارات/دبی/جمیرا ۱.۲.۳</option>
-                            <option value="امارات/دبی/پالم">امارات/دبی/پالم</option>
-                            <option value="امارات/دبی/Damac Hills">امارات/دبی/Damac Hills</option>
-                            <option value="امارات/دبی/JVC">امارات/دبی/JVC</option>
-                            <option value="امارات/دبی/JLT">امارات/دبی/JLT</option>
-                            <option value="امارات/دبی/مارینا">امارات/دبی/مارینا</option>
-                            <option value="امارات/دبی/JBR">امارات/دبی/JBR</option>
-                            <option value="امارات/امارت دبی/جبل علی – ابن بطوطه – حتا و…">امارات/امارت دبی/جبل علی – ابن
-                                بطوطه – حتا و…</option>
-                            <option value="امارات / فرودگاه شارجه">امارات / فرودگاه شارجه</option>
-                            <option value="امارات / فرودگاه ابوظبی">امارات / فرودگاه ابوظبی</option>
+                            <option value="UAE/Dubai/Clock Tower/Main Branch">UAE/Dubai/Clock Tower/Main Branch</option>
+                            <option value="UAE/Dubai/Dubai Airport/Terminal 1">UAE/Dubai/Dubai Airport/Terminal 1
+                            </option>
+                            <option value="UAE/Dubai/Dubai Airport/Terminal 2">UAE/Dubai/Dubai Airport/Terminal 2
+                            </option>
+                            <option value="UAE/Dubai/Dubai Airport/Terminal 3">UAE/Dubai/Dubai Airport/Terminal 3
+                            </option>
+                            <option value="UAE/Dubai/Downtown">UAE/Dubai/Downtown</option>
+                            <option value="UAE/Dubai/Jumeirah 1, 2, 3">UAE/Dubai/Jumeirah 1, 2, 3</option>
+                            <option value="UAE/Dubai/Palm">UAE/Dubai/Palm</option>
+                            <option value="UAE/Dubai/Damac Hills">UAE/Dubai/Damac Hills</option>
+                            <option value="UAE/Dubai/JVC">UAE/Dubai/JVC</option>
+                            <option value="UAE/Dubai/JLT">UAE/Dubai/JLT</option>
+                            <option value="UAE/Dubai/Marina">UAE/Dubai/Marina</option>
+                            <option value="UAE/Dubai/JBR">UAE/Dubai/JBR</option>
+                            <option value="UAE/Dubai/Jebel Ali – Ibn Battuta – Hatta & more">UAE/Dubai/Jebel Ali – Ibn
+                                Battuta – Hatta & more</option>
+                            <option value="UAE/Sharjah Airport">UAE/Sharjah Airport</option>
+                            <option value="UAE/Abu Dhabi Airport">UAE/Abu Dhabi Airport</option>
+
                         </select>
                         <div class="invalid-feedback">Please select a valid Return Location.</div>
                     </div>
@@ -102,7 +110,7 @@
                             min="{{ \Carbon\Carbon::now()->format('Y-m-d\TH:i') }}" />
                         <div class="invalid-feedback">Pickup Date is required!</div>
                     </div>
-                    
+
                     <div class="mb-3 col-12 col-md-6">
                         <label for="return_date" class="form-label">Return Date & Time</label>
                         <input type="datetime-local" id="return_date" class="form-control" name="return_date"
@@ -146,8 +154,7 @@
                     <div class="form-check cars col-12" id="month-car">
                         @foreach ($cars as $car)
                             <label class="col-lg-12 car car-box {{ $selectedCar?->id === $car->id ? 'checked' : '' }}"
-                                wire:click="selectCar({{ $car->id }})"
-                                wire:key="car-{{ $car->id }}">
+                                wire:click="selectCar({{ $car->id }})" wire:key="car-{{ $car->id }}">
                                 <!-- Radio input -->
                                 <input type="radio" name="carId" id="car-{{ $car->id }}"
                                     class="form-check-input car-type d-none" value="{{ $car->id }}" />
@@ -176,7 +183,7 @@
                                         <div class="row g-3">
                                             <!-- Pricing Table -->
                                             <div class="col-12 col-sm-12 col-md-4 col-lg-6">
-                                                <table class="table table-sm mb-0 styled-table " >
+                                                <table class="table table-sm mb-0 styled-table ">
                                                     <tbody>
                                                         <tr>
                                                             <th scope="row">Daily</th>
