@@ -26,7 +26,7 @@ class ReserveCarForm extends Component
     public function mount()
     {
         // مقدار اولیه نمایش تمام ماشین‌ها
-        $this->cars = Car::all();
+        $this->cars = $this->getUniqueModelCars();
     }
 
     public function selectCar($carId)
@@ -36,13 +36,24 @@ class ReserveCarForm extends Component
 
     public function updatedSelectedBrand($value)
     {
-        // وقتی کاربر برند را تغییر داد، فیلتر اعمال شود
-        $this->cars = $value
-            ? Car::whereHas('carModel', function ($query) use ($value) {
-                $query->where('brand', $value);
-            })->get()
-            : Car::all();
-            // dd($this->cars);
+        $this->cars = $this->getUniqueModelCars($value);
+    }
+
+
+    private function getUniqueModelCars($brand = null)
+    {
+        $query = Car::with('carModel');
+
+        if ($brand) {
+            $query->whereHas('carModel', function ($q) use ($brand) {
+                $q->where('brand', $brand);
+            });
+        }
+
+        $cars = $query->get();
+
+        // فقط یک ماشین برای هر car_model_id
+        return $cars->unique('car_model_id')->values();
     }
 
 
@@ -52,5 +63,4 @@ class ReserveCarForm extends Component
         $brands = CarModel::distinct()->pluck('brand');
         return view('livewire.reservation.reserve-car-form', compact('brands'))->layout('layouts.reservation');
     }
-   
 }

@@ -120,6 +120,12 @@
                     </div>
 
 
+                    <div class="mb-3 col-12 col-md-6" wire:ignore>
+                        <label for="pickup_date" class="form-label">Pickup Date & Time</label>
+                        <input type="text" id="pickup_date" class="form-control" placeholder="تاریخ و زمان">
+                    </div>
+
+
 
                     <div class="mb-3 col-12 col-md-6">
                         <label for="messenger_phone" class="form-label">Telegram/WhatsApp Number</label>
@@ -444,8 +450,6 @@
 
                     <!-- Support Information -->
                     <p>If you need any assistance or have questions, don't hesitate to reach out to us:</p>
-                    <p><strong>Email:</strong> <a href="mailto:support@loremgaming.com">support@loremgaming.com</a></p>
-
                     <!-- Call to Action Button -->
                     <a href="https://karaplusrental.com/" class="btn btn-primary mt-4">Back to Homepage</a>
                 </header>
@@ -455,3 +459,22 @@
         </div>
     </div>
 </div>
+
+
+@push('scripts')
+    <script>
+        $(document).ready(function() {
+            $('#pickup_date').persianDatepicker({
+                format: 'YYYY/MM/DD HH:mm',
+                timePicker: {
+                    enabled: true
+                },
+                autoClose: true
+            });
+
+            $('#pickup_date').on('change', function() {
+                @this.set('pickup_date', $(this).val());
+            });
+        });
+    </script>
+@endpush

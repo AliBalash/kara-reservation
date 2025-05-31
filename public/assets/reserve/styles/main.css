@@ -37,13 +37,13 @@ body {
 
 .step header h1 {
   font-family: "ub-bd", sans-serif;
-  color: #800020;
+  color: #afafaf;
 }
 .step header p {
   color: hsl(231, 11%, 63%);
 }
 .step .next-step button {
-  background-color: #800020;
+  background-color: #afafaf;
 }
 
 .bad-feedback {
@@ -84,12 +84,12 @@ body {
 }
 .car-step .cars .car:hover {
   background-color: #9B1B2F; /* رنگ روشن‌تر برای hover */
-  border: 2px solid #FF4D6E; /* مرز برجسته‌تر در حالت hover */
+  border: 2px solid none; /* مرز برجسته‌تر در حالت hover */
   cursor: pointer; /* تغییر نشانگر موس */
   transition: background-color 0.3s ease, border 0.3s ease;
 }
 .car-step .cars .car.checked {
-  background-color: #800020; /* زرشکی */
+  background-color: #afafaf; /* زرشکی */
   color: #FFFFFF; /* سفید برای متن */
   border: 2px solid #D72638; /* قرمز روشن برای برجسته‌سازی */
   transition: background-color 0.3s ease, border 0.3s ease;
@@ -128,7 +128,7 @@ body {
 }
 .addons-step .addon p:first-child {
   font-family: "ub-md", sans-serif;
-  color: #800020;
+  color: #afafaf;
   font-weight: bold;
 }
 .addons-step .addon p:nth-child(2) {
@@ -191,7 +191,7 @@ body {
   width: 35px;
   border-radius: 50%;
   transition: transform 1s;
-  border: 2px solid #800020;
+  border: 2px solid #afafaf;
   transform: rotate(180deg);
   filter: grayscale(50%);
 }
@@ -473,9 +473,9 @@ body {
 
 
 .btn-red {
-  background-color: #800020;
+  background-color: #afafaf;
   color: #fff;
-  border: 1px solid #800020;
+  border: 1px solid #afafaf;
   transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
@@ -492,8 +492,8 @@ body {
 }
 
 .btn-red:disabled {
-  background-color: #800020;
-  border-color: #800020;
+  background-color: #afafaf;
+  border-color: #afafaf;
   opacity: 0.65;
   cursor: not-allowed;
 }
