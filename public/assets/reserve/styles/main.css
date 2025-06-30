@@ -1,14 +1,15 @@
 @font-face {
   font-family: "ub-rg";
-  src: url("../assets/fonts/Ubuntu-Regular.ttf");
+  src: url("../assets/fonts/IRANSans_Regular.ttf");
 }
 @font-face {
-  font-family: "ub-bd";
-  src: url("../assets/fonts/Ubuntu-Bold.ttf");
+  /* font-family: "ub-bd"; */  
+  font-family: 'IRANSansBold' ;
+  src: url("../assets/fonts/IRANSans_Bold.ttf");
 }
 @font-face {
   font-family: "ub-md";
-  src: url("../assets/fonts/Ubuntu-Medium.ttf");
+  src: url("../assets/fonts/IRANSans_Regular.ttf");
 }
 *:focus {
   box-shadow: none !important;
@@ -36,7 +37,9 @@ body {
 }
 
 .step header h1 {
-  font-family: "ub-bd", sans-serif;
+  /* font-family: "ub-bd", sans-serif; */
+  font-family: 'IRANSansBold' ;
+
   color: #afafaf;
 }
 .step header p {
@@ -209,7 +212,7 @@ body {
 
 #month-car{
     max-width: 100%;
-    max-height: 65vh;
+    max-height: 55vh;
     overflow: auto;
     border-radius: 10px;
     /* box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.235); */

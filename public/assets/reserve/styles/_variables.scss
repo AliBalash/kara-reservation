@@ -15,16 +15,18 @@ $white: hsl(0, 0%, 100%);
 
 // fonts
 @font-face {
-  font-family: "ub-rg";
-  src: url("../assets/fonts/Ubuntu-Regular.ttf");
+  font-family: "IRANSans_Regular";
+  src: url("../assets/fonts/IRANSans_Regular.ttf");
 }
 
 @font-face {
-  font-family: "ub-bd";
-  src: url("../assets/fonts/Ubuntu-Bold.ttf");
+  // font-family: "ub-bd";  
+  font-family: 'IRANSansBold' ;
+
+  src: url("../assets/fonts/IRANSans_Bold.ttf");
 }
 
 @font-face {
   font-family: "ub-md";
-  src: url("../assets/fonts/Ubuntu-Medium.ttf");
+  src: url("../assets/fonts/IRANSans_Regular.ttf");
 }

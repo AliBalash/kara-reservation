@@ -28,7 +28,9 @@ body {
 
 .step {
   header h1 {
-    font-family: "ub-bd", sans-serif;
+    src: url("../assets/fonts/IRANSans_Bold.ttf");
+    font-family: 'IRANSansBold' ;
+    // font-family: "ub-bd", sans-serif;
     color: $marine-blue;
   }
   header p {

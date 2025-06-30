@@ -99,16 +99,6 @@ class Contract extends Model
         return $this->belongsTo(Car::class);
     }
 
-    /**
-     * متد برای محاسبه قیمت نهایی قرارداد با توجه به روزهای اجاره.
-     *
-     * @return decimal
-     */
-    public function calculateTotalPrice(): decimal
-    {
-        $days = $this->pickup_date->diffInDays($this->return_date ?? now());
-        return $days * $this->car->price_per_day;
-    }
 
     // Relationship with CustomerDocument model
     public function customerDocument()
@@ -171,5 +161,30 @@ class Contract extends Model
     public function pickupDocument()
     {
         return $this->hasOne(PickupDocument::class);
+    }
+    // همه‌ی آیتم‌های قیمت
+    public function charges()
+    {
+        return $this->hasMany(contractCharges::class);
+    }
+
+    // محاسبه مجموع مبلغ از روی آیتم‌ها
+    public function calculateTotalPrice()
+    {
+        return $this->charges()->sum('amount');
+    }
+
+    // بروزرسانی ستون total_price
+    public function updateTotalPrice()
+    {
+        $total = $this->calculateTotalPrice();
+        $this->update(['total_price' => $total]);
+        return $total;
+    }
+
+    // گرفتن آیتم‌ها بر اساس نوع (Base, Addon, Location, Deposit)
+    public function getChargesByType(string $type)
+    {
+        return $this->charges()->where('type', $type)->get();
     }
 }

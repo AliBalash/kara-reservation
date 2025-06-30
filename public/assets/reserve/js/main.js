@@ -21,17 +21,10 @@ const yearlyCarBtns = document.querySelectorAll("#year-car .car-type");
 const pricingTables = document.getElementsByClassName("table");
 const themeMode = document.querySelector(".theme-mode");
 
-
-
-
-
 //vars
 let currentStep = 0;
 
-// changeCarBtn.addEventListener("click", function () {
-//   currentStep = 1;
-//   updateStep();
-// });
+
 
 //Run
 updateStep();
@@ -57,10 +50,10 @@ function updateStep() {
 
   // تغییر متن و رفتار دکمه Next در مراحل مختلف
   if (currentStep == allSteps.length - 1) {
-    nextBtn.innerHTML = "Confirm and Submit";
+    nextBtn.innerHTML = "تایید و ارسال نهایی";
     nextBtn.classList.add("done");
   } else {
-    nextBtn.innerHTML = "Next";
+    nextBtn.innerHTML = "مرحله بعد";
     nextBtn.classList.remove("done");
   }
 }
@@ -70,7 +63,7 @@ nextBtn.addEventListener("click", nextStep);
 backBtn.addEventListener("click", backStep);
 
 function nextStep(e) {
-  if (currentStep == 0 || currentStep == 1 || currentStep == 2|| currentStep == 3) {
+  if (currentStep == 0 || currentStep == 1 || currentStep == 2 || currentStep == 3 || currentStep == 4) {
     if (!formChecker()) {
       return 0;
     }
@@ -146,11 +139,7 @@ function formChecker() {
 
   let valid = true;
   if (currentStep == 0) {
-    let email = checkoutForm.email;
-    let firstName = checkoutForm.first_name;
-    let lastName = checkoutForm.last_name;
-    let phone = checkoutForm.phone;
-    let messengerPhone = checkoutForm.messenger_phone;
+
     let returnDate = checkoutForm.return_date;
     let pickupDate = checkoutForm.pickup_date;
     let pickupLocation = checkoutForm.pickup_location;
@@ -158,8 +147,6 @@ function formChecker() {
 
     // Validate Return Date is after Pickup Date
     if (!isReturnDateAfterPickupDate(pickupDate, returnDate)) {
-
-
       valid = false;
     }
     // Validate Pickup Date
@@ -167,52 +154,19 @@ function formChecker() {
 
       valid = false;
     }
-
+    // Validate Return Date
     if (!isValidDate(returnDate)) {
-
-      valid = false;
-    }
-
-    // Validate First Name
-    if (!isValidName(firstName)) {
-
-      valid = false;
-    }
-
-    // Validate Last Name
-    if (!isValidName(lastName)) {
-
-      valid = false;
-    }
-
-    // Validate Email
-    if (!isValidEmail(email)) {
-
-      valid = false;
-    }
-
-    // Validate Phone
-    if (!isValidPhone(phone)) {
 
       valid = false;
     }
     // Validate Pickup Location
     if (!isValidPickupLocation(pickupLocation)) {
-
       valid = false;
     }
-
     // Validate Return Location
     if (!isValidReturnLocation(returnLocation)) {
-
       valid = false;
     }
-
-    if (!isValidMessengerPhone(messengerPhone)) {
-
-      valid = false;
-    }
-
     return valid;
   }
 
@@ -225,29 +179,63 @@ function formChecker() {
   }
 
   if (currentStep == 2) {
-    return valid;
-  }
 
-  if (currentStep == 3) {
-    // اعتبارسنجی چک‌باکس‌ها در مرحله آخر
-    let confirmDeposit = checkoutForm.confirm_deposit;
-    let acceptTerms = checkoutForm.accept_terms;
-    if (!confirmDeposit.checked) {
-      confirmDeposit.classList.add("is-invalid");
-      valid = false;
-    } else {
-      confirmDeposit.classList.remove("is-invalid");
-      confirmDeposit.classList.add("is-valid");
-    }
+    let acceptTerms = document.getElementById("accept_terms");
+    let acceptTermsError = document.getElementById("accept_terms_error");
+
+    let valid = true;
 
     if (!acceptTerms.checked) {
       acceptTerms.classList.add("is-invalid");
+      acceptTermsError.textContent = "برای ادامه، باید شرایط را بپذیرید.";
       valid = false;
     } else {
       acceptTerms.classList.remove("is-invalid");
       acceptTerms.classList.add("is-valid");
+      acceptTermsError.textContent = "";
     }
     return valid;
+  }
+
+  if (currentStep == 3) {
+    return valid;
+
+  }
+  if (currentStep == 4) {
+
+    let email = checkoutForm.email;
+    let firstName = checkoutForm.first_name;
+    let lastName = checkoutForm.last_name;
+    let phone = checkoutForm.phone;
+    let messengerPhone = checkoutForm.messenger_phone;
+
+    // Validate First Name
+    if (!isValidName(firstName)) {
+      valid = false;
+    }
+
+    // Validate Last Name
+    if (!isValidName(lastName)) {
+      valid = false;
+    }
+
+    // Validate Email
+    if (!isValidEmail(email)) {
+      valid = false;
+    }
+
+    // Validate Phone
+    if (!isValidPhone(phone)) {
+      valid = false;
+    }
+
+    // Validate Messenger Phone
+    if (!isValidMessengerPhone(messengerPhone)) {
+      valid = false;
+    }
+
+    return valid;
+
   }
 
 }
@@ -293,11 +281,11 @@ function isValidPhone(phoneField) {
 
     // Update message bar asas khata
     if (phoneField.value.length < 11) {
-      feedbackElement.textContent = "Phone number must be 11 digits!";
+      feedbackElement.textContent = "شماره تلفن باید ۱۱ رقمی باشد!";
     } else if (!phoneField.value.startsWith("09")) {
-      feedbackElement.textContent = "Phone number must start with '09'.";
+      feedbackElement.textContent = "شماره تلفن باید با ۰۹ شروع شود.";
     } else {
-      feedbackElement.textContent = "Invalid phone number format.";
+      feedbackElement.textContent = "فرمت شماره تلفن نادرست است.";
     }
   } else {
     phoneField.classList.remove("is-invalid");
@@ -319,11 +307,11 @@ function isValidMessengerPhone(phoneField) {
 
     // Update message bar asas khata
     if (phoneField.value.length < 11) {
-      feedbackElement.textContent = "Messenger number must be 11 digits!";
+      feedbackElement.textContent = "شماره مسنجر باید ۱۱ رقمی باشد!";
     } else if (!phoneField.value.startsWith("09")) {
-      feedbackElement.textContent = "Messenger number must start with '09'.";
+      feedbackElement.textContent = "شماره مسنجر باید با ۰۹ شروع شود.";
     } else {
-      feedbackElement.textContent = "Invalid messenger number format.";
+      feedbackElement.textContent = "فرمت شماره مسنجر نادرست است.";
     }
   } else {
     phoneField.classList.remove("is-invalid");
@@ -334,26 +322,32 @@ function isValidMessengerPhone(phoneField) {
   return validMessengerPhone;
 }
 
-function validateCars(btns = document.querySelectorAll(".car-type")) {
-  let validCar = false; // مقدار پیش‌فرض اشتباه باشد
-  let feedback = document.querySelector(".bad-feedback-car");
+function validateCars() {
+  const radioButtons = document.querySelectorAll("input[name='carId']");
+  const feedback = document.querySelector(".bad-feedback-car");
+
   if (!feedback) {
     console.error("Element with class 'bad-feedback-car' not found!");
     return false;
   }
-  // بررسی اینکه حداقل یک ماشین انتخاب شده باشد
-  btns.forEach((inp) => {
-    if (inp.checked) {
-      validCar = true;
+
+  let selected = false;
+  for (let radio of radioButtons) {
+    if (radio.checked) {
+      selected = true;
+      break;
     }
-  });
-  if (!validCar) {
-    feedback.classList.remove("d-none"); // نمایش پیام خطا
-  } else {
-    feedback.classList.add("d-none"); // مخفی کردن پیام خطا
   }
-  return validCar;
+
+  if (!selected) {
+    feedback.classList.remove("d-none");
+    return false;
+  } else {
+    feedback.classList.add("d-none");
+    return true;
+  }
 }
+
 
 function isValidDate(dateField) {
 

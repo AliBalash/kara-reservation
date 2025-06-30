@@ -19,6 +19,7 @@
         .attribution a {
             color: hsl(228, 45%, 44%);
         }
+        
     </style>
     @stack('styles')
 </head>
@@ -28,7 +29,7 @@
         {{ $slot }}
     </div>
 
-    <script src="{{ asset('assets/reserve/js/main.js') }}" defer></script>
+    {{-- <script src="{{ asset('assets/reserve/js/main.js') }}" defer></script> --}}
     <script src="{{ asset('assets/reserve/js/bootstrap.min.js') }}"></script>
     @stack('scripts')
 </body>

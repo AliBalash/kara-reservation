@@ -1,480 +1,809 @@
 <!-- main container start -->
 <div class="center-box d-flex justify-content-center align-items-center">
     <div class="wrapper p-4">
-
         <div class="gx-1">
-            <!-- End Sidebar -->
             <form class="col-md-12 p-1 needs-validation" id="checkoutForm" action="{{ route('reserve.car') }}"
                 method="post" novalidate>
                 @csrf
 
-                <!-- Start profile step -->
-                <div class="step step-1 row profile-step d-none">
-                    <header class="col-12">
-                        <h1>Profile Info</h1>
-                        <p class="lead">Please provide your name, email address, and phone number.</p>
+                <!-- Start profile step - ترجمه و RTL -->
+                <div class="step step-1 row profile-step d-none" wire:ignore.self>
+                    <header class="col-12 mb-5">
+                        <h1>اطلاعات قرارداد</h1>
+                        <p class="lead">لطفا اطلاعات مکان و تاریخ را وارد کنید</p>
                     </header>
 
-                    <div class="mb-3 col-12 col-md-6">
-                        <label for="first_name" class="form-label">First Name</label>
-                        <input type="text" id="first_name" class="form-control" name="first_name"
-                            wire:model="first_name" placeholder="First Name" />
-                        <div class="invalid-feedback">First Name is required!</div>
-                    </div>
 
                     <div class="mb-3 col-12 col-md-6">
-                        <label for="last_name" class="form-label">Last Name</label>
-                        <input type="text" id="last_name" class="form-control" name="last_name"
-                            wire:model="last_name" placeholder="Last Name" />
-                        <div class="invalid-feedback">Last Name is required!</div>
-                    </div>
-
-
-                    <div class="mb-3 col-12 col-md-6">
-                        <label for="email" class="form-label">Email Address</label>
-                        <input type="email" class="form-control" required id="email" name="email"
-                            wire:model="email" placeholder="name@example.com" />
-                        <div class="invalid-feedback">Valid Email is required!</div>
-                    </div>
-
-                    <div class="mb-3 col-12 col-md-6">
-                        <label for="phone" class="form-label">Phone Number</label>
-                        <input type="tel" class="form-control" required id="phone" name="phone"
-                            wire:model="phone" placeholder="eg 09123456789" />
-                        <div class="invalid-feedback">Phone is required!</div>
-                    </div>
-
-                    <div class="mb-3 col-12 col-md-6">
-                        <label for="pickup_location" class="form-label">Pickup Location</label>
-                        <select id="pickup_location" class="form-select" name="pickup_location"
-                            wire:model="pickup_location">
-                            <option value="">Location</option>
-                            <option value="UAE/Dubai/Clock Tower/Main Branch">UAE/Dubai/Clock Tower/Main Branch</option>
-                            <option value="UAE/Dubai/Dubai Airport/Terminal 1">UAE/Dubai/Dubai Airport/Terminal 1
-                            </option>
-                            <option value="UAE/Dubai/Dubai Airport/Terminal 2">UAE/Dubai/Dubai Airport/Terminal 2
-                            </option>
-                            <option value="UAE/Dubai/Dubai Airport/Terminal 3">UAE/Dubai/Dubai Airport/Terminal 3
-                            </option>
-                            <option value="UAE/Dubai/Downtown">UAE/Dubai/Downtown</option>
-                            <option value="UAE/Dubai/Jumeirah 1, 2, 3">UAE/Dubai/Jumeirah 1, 2, 3</option>
-                            <option value="UAE/Dubai/Palm">UAE/Dubai/Palm</option>
-                            <option value="UAE/Dubai/Damac Hills">UAE/Dubai/Damac Hills</option>
-                            <option value="UAE/Dubai/JVC">UAE/Dubai/JVC</option>
-                            <option value="UAE/Dubai/JLT">UAE/Dubai/JLT</option>
-                            <option value="UAE/Dubai/Marina">UAE/Dubai/Marina</option>
-                            <option value="UAE/Dubai/JBR">UAE/Dubai/JBR</option>
-                            <option value="UAE/Dubai/Jebel Ali – Ibn Battuta – Hatta & more">UAE/Dubai/Jebel Ali – Ibn
-                                Battuta – Hatta & more</option>
-                            <option value="UAE/Sharjah Airport">UAE/Sharjah Airport</option>
-                            <option value="UAE/Abu Dhabi Airport">UAE/Abu Dhabi Airport</option>
-
-
-                        </select>
-                        <div class="invalid-feedback">Please select a valid Pickup Location.</div>
-                    </div>
-
-                    <div class="mb-3 col-12 col-md-6">
-                        <label for="return_location" class="form-label">Return Location</label>
-                        <select id="return_location" class="form-select" name="return_location"
-                            wire:model="return_location">
-                            <option value="">Location</option>
-                            <option value="UAE/Dubai/Clock Tower/Main Branch">UAE/Dubai/Clock Tower/Main Branch</option>
-                            <option value="UAE/Dubai/Dubai Airport/Terminal 1">UAE/Dubai/Dubai Airport/Terminal 1
-                            </option>
-                            <option value="UAE/Dubai/Dubai Airport/Terminal 2">UAE/Dubai/Dubai Airport/Terminal 2
-                            </option>
-                            <option value="UAE/Dubai/Dubai Airport/Terminal 3">UAE/Dubai/Dubai Airport/Terminal 3
-                            </option>
-                            <option value="UAE/Dubai/Downtown">UAE/Dubai/Downtown</option>
-                            <option value="UAE/Dubai/Jumeirah 1, 2, 3">UAE/Dubai/Jumeirah 1, 2, 3</option>
-                            <option value="UAE/Dubai/Palm">UAE/Dubai/Palm</option>
-                            <option value="UAE/Dubai/Damac Hills">UAE/Dubai/Damac Hills</option>
-                            <option value="UAE/Dubai/JVC">UAE/Dubai/JVC</option>
-                            <option value="UAE/Dubai/JLT">UAE/Dubai/JLT</option>
-                            <option value="UAE/Dubai/Marina">UAE/Dubai/Marina</option>
-                            <option value="UAE/Dubai/JBR">UAE/Dubai/JBR</option>
-                            <option value="UAE/Dubai/Jebel Ali – Ibn Battuta – Hatta & more">UAE/Dubai/Jebel Ali – Ibn
-                                Battuta – Hatta & more</option>
-                            <option value="UAE/Sharjah Airport">UAE/Sharjah Airport</option>
-                            <option value="UAE/Abu Dhabi Airport">UAE/Abu Dhabi Airport</option>
-
-                        </select>
-                        <div class="invalid-feedback">Please select a valid Return Location.</div>
-                    </div>
-
-                    <div class="mb-3 col-12 col-md-6">
-                        <label for="pickup_date" class="form-label">Pickup Date & Time</label>
+                        <label for="pickup_date" class="form-label">
+                            <i class="fa fa-calendar-alt text-danger ms-1"></i>
+                            تاریخ و زمان تحویل
+                        </label>
                         <input type="datetime-local" id="pickup_date" class="form-control" name="pickup_date"
-                            wire:model="pickup_date" placeholder="Pickup Date & Time"
+                            wire:model.live.debounce.500ms="pickup_date" placeholder="تاریخ و زمان تحویل"
                             min="{{ \Carbon\Carbon::now()->format('Y-m-d\TH:i') }}" />
-                        <div class="invalid-feedback">Pickup Date is required!</div>
+                        <div class="invalid-feedback">تاریخ تحویل الزامی است</div>
                     </div>
 
                     <div class="mb-3 col-12 col-md-6">
-                        <label for="return_date" class="form-label">Return Date & Time</label>
+                        <label for="return_date" class="form-label">
+                            <i class="fa fa-calendar-check text-danger ms-1"></i>
+                            تاریخ و زمان بازگشت
+                        </label>
                         <input type="datetime-local" id="return_date" class="form-control" name="return_date"
-                            wire:model="return_date" placeholder="Return Date & Time"
+                            wire:model.live.debounce.500ms="return_date" placeholder="تاریخ و زمان بازگشت"
                             min="{{ \Carbon\Carbon::now()->format('Y-m-d\TH:i') }}" />
-                        <div class="invalid-feedback">Return Date is required!</div>
+                        <div class="invalid-feedback">تاریخ بازگشت الزامی است</div>
                     </div>
-
-
-                    <div class="mb-3 col-12 col-md-6" wire:ignore>
-                        <label for="pickup_date" class="form-label">Pickup Date & Time</label>
-                        <input type="text" id="pickup_date" class="form-control" placeholder="تاریخ و زمان">
-                    </div>
-
-
 
                     <div class="mb-3 col-12 col-md-6">
-                        <label for="messenger_phone" class="form-label">Telegram/WhatsApp Number</label>
-                        <input type="tel" class="form-control" required id="messenger_phone"
-                            name="messenger_phone" wire:model="messenger_phone" placeholder="eg 09123456789" />
-                        <div class="invalid-feedback">Messenger number is required!</div>
+                        <label for="pickup_location" class="form-label">
+                            <i class="fa fa-map-marker-alt text-danger ms-1"></i>
+                            محل تحویل
+                        </label>
+                        <select id="pickup_location" class="form-select" name="pickup_location"
+                            wire:model.live.debounce.1000ms="pickup_location">
+                            <option value="">مکان را انتخاب کنید</option>
+                            <option value="UAE/Dubai/Clock Tower/Main Branch">امارات / دبی / برج ساعت / شعبه اصلی
+                            </option>
+                            <option value="UAE/Dubai/Dubai Airport/Terminal 1">امارات / دبی / فرودگاه دبی / ترمینال ۱
+                            </option>
+                            <option value="UAE/Dubai/Dubai Airport/Terminal 2">امارات / دبی / فرودگاه دبی / ترمینال ۲
+                            </option>
+                            <option value="UAE/Dubai/Dubai Airport/Terminal 3">امارات / دبی / فرودگاه دبی / ترمینال ۳
+                            </option>
+                            <option value="UAE/Dubai/Downtown">امارات / دبی / مرکز شهر (داون‌تاون)</option>
+                            <option value="UAE/Dubai/Jumeirah 1, 2, 3">امارات / دبی / جمیرا ۱، ۲، ۳</option>
+                            <option value="UAE/Dubai/Palm">امارات / دبی / پالم</option>
+                            <option value="UAE/Dubai/Damac Hills">امارات / دبی / داماک هیلز</option>
+                            <option value="UAE/Dubai/JVC">امارات / دبی / JVC</option>
+                            <option value="UAE/Dubai/JLT">امارات / دبی / JLT</option>
+                            <option value="UAE/Dubai/Marina">امارات / دبی / مارینا</option>
+                            <option value="UAE/Dubai/JBR">امارات / دبی / JBR</option>
+                            <option value="UAE/Dubai/Jebel Ali – Ibn Battuta – Hatta & more">امارات / دبی / جبل علی –
+                                ابن بطوطه – حتا و غیره</option>
+                            <option value="UAE/Sharjah Airport">امارات / فرودگاه شارجه</option>
+                            <option value="UAE/Abu Dhabi Airport">امارات / فرودگاه ابوظبی</option>
+                            <!-- سایر گزینه‌ها به فارسی ترجمه شوند -->
+                        </select>
+                        <div class="invalid-feedback">لطفا محل تحویل معتبر انتخاب کنید</div>
                     </div>
 
-                    <div id="date-error" class="bad-feedback d-none">Return Date must be after Pickup Date.</div>
+                    <div class="mb-3 col-12 col-md-6">
+                        <label for="return_location" class="form-label">
+                            <i class="fa fa-map-marked-alt text-danger ms-1"></i>
+                            محل بازگشت
+                        </label>
+                        <select id="return_location" class="form-select" name="return_location"
+                            wire:model.live.debounce.1000ms="return_location">
+                            <option value="">مکان را انتخاب کنید</option>
+                            <option value="UAE/Dubai/Clock Tower/Main Branch">امارات / دبی / برج ساعت / شعبه اصلی
+                            </option>
+                            <option value="UAE/Dubai/Dubai Airport/Terminal 1">امارات / دبی / فرودگاه دبی / ترمینال ۱
+                            </option>
+                            <option value="UAE/Dubai/Dubai Airport/Terminal 2">امارات / دبی / فرودگاه دبی / ترمینال ۲
+                            </option>
+                            <option value="UAE/Dubai/Dubai Airport/Terminal 3">امارات / دبی / فرودگاه دبی / ترمینال ۳
+                            </option>
+                            <option value="UAE/Dubai/Downtown">امارات / دبی / مرکز شهر (داون‌تاون)</option>
+                            <option value="UAE/Dubai/Jumeirah 1, 2, 3">امارات / دبی / جمیرا ۱، ۲، ۳</option>
+                            <option value="UAE/Dubai/Palm">امارات / دبی / پالم</option>
+                            <option value="UAE/Dubai/Damac Hills">امارات / دبی / داماک هیلز</option>
+                            <option value="UAE/Dubai/JVC">امارات / دبی / JVC</option>
+                            <option value="UAE/Dubai/JLT">امارات / دبی / JLT</option>
+                            <option value="UAE/Dubai/Marina">امارات / دبی / مارینا</option>
+                            <option value="UAE/Dubai/JBR">امارات / دبی / JBR</option>
+                            <option value="UAE/Dubai/Jebel Ali – Ibn Battuta – Hatta & more">امارات / دبی / جبل علی –
+                                ابن بطوطه – حتا و غیره</option>
+                            <option value="UAE/Sharjah Airport">امارات / فرودگاه شارجه</option>
+                            <option value="UAE/Abu Dhabi Airport">امارات / فرودگاه ابوظبی</option>
+                            <!-- سایر گزینه‌ها به فارسی ترجمه شوند -->
+                        </select>
+                        <div class="invalid-feedback">لطفا محل بازگشت معتبر انتخاب کنید</div>
+                    </div>
 
+                    <div id="date-error" class="bad-feedback d-none">تاریخ بازگشت باید بعد از تاریخ تحویل باشد</div>
                 </div>
                 <!-- End profile-step -->
 
                 <!-- Start car step -->
-                <div class="step row car-step d-none" wire:ignore.self>
-                    <header class="col-12">
-                        <h1>Select your car</h1>
-                        {{-- <p class="lead">You have the option of monthly or yearly billing.</p> --}}
+                <div class="step row car-step" wire:ignore.self>
+                    <header class="col-12 mb-5">
+                        <h1>انتخاب خودروی دلخواه</h1>
+                        <p class="lead text-muted">مدل مورد نظر خود را از لیست زیر انتخاب کنید</p>
                     </header>
 
-                    <!-- Select Box برای فیلتر برندها -->
-                    <div class="form-check mb-1 col-12 col-md-6">
-                        <label for="brand" class="form-label">Filter by Brand</label>
-                        <select id="brand" class="form-select" wire:model.live="selectedBrand">
-                            <option value="">All Brands</option>
-                            @foreach ($brands as $brand)
-                                <option value="{{ $brand }}">{{ $brand }}</option>
-                            @endforeach
-                        </select>
+                    <!-- Brand Filter -->
+                    <div class="col-12 col-md-6 mb-4">
+                        <div class="input-group" dir="ltr">
+                            <span class="input-group-text bg-light border-start-0">
+                                <i class="fas fa-filter text-muted"></i>
+                            </span>
+                            <select id="brand" class="form-select border-end-0 ps-0"
+                                wire:model.live="selectedBrand">
+                                <option value="">همه برندها</option>
+                                @foreach ($brands as $brand)
+                                    <option value="{{ $brand }}">{{ $brand }}</option>
+                                @endforeach
+                            </select>
+                        </div>
                     </div>
 
-                    <div class="form-check cars col-12" id="month-car">
+                    <div class="col-12" id="month-car">
                         @foreach ($cars as $car)
-                            <label class="col-lg-12 car car-box {{ $selectedCar?->id === $car->id ? 'checked' : '' }}"
-                                wire:click="selectCar({{ $car->id }})" wire:key="car-{{ $car->id }}">
-                                <!-- Radio input -->
+                            <div class="car-card mt-2 mb-4 position-relative overflow-hidden {{ $selectedCar?->id === $car->id ? 'card-active' : '' }}"
+                                wire:key="car-{{ $car->id }}">
+
                                 <input type="radio" name="carId" id="car-{{ $car->id }}"
-                                    class="form-check-input car-type d-none" value="{{ $car->id }}" />
-                                <input type="hidden" name="carId" value="{{ $selectedCar?->id }}">
-                                <!-- Box layout -->
-                                <div
-                                    class="car-box-container d-flex flex-column flex-md-row-reverse shadow-sm p-3 rounded row">
-                                    <!-- Car Image -->
-                                    <div class="car-image mb-3 mb-md-0 text-md-right col-12 col-md-6 col-lg-5">
-                                        <img src="{{ $car->carModel->images ? asset('assets/car-pics/' . $car->carModel->images->file_name) : asset('assets/car-pics/car test.webp') }}"
-                                            class="img-fluid rounded" alt="{{ $car->carModel->brand }} Thumbnail" />
-                                    </div>
+                                    class="form-check-input car-type d-none" value="{{ $car->id }}"
+                                    {{ $selectedCar?->id === $car->id ? 'checked' : '' }} />
 
-                                    <!-- Car Information -->
-                                    <div class="car-info flex-grow-1 text-md-left col-12 col-md-6 col-lg-7">
-
-                                        <h4 class="car-name">
-                                            {{ $car->carModel->brand }} {{ $car->carModel->model }}
-                                        </h4>
-
-                                        <!-- Manufacturing Year -->
-                                        <h5 class="car-year text-secondary">
-                                            {{ $car->manufacturing_year }}
-                                        </h5>
-
-                                        <div class="row g-3">
-                                            <!-- Pricing Table -->
-                                            <div class="col-12 col-sm-12 col-md-4 col-lg-6">
-                                                <table class="table table-sm mb-0 styled-table ">
-                                                    <tbody>
-                                                        <tr>
-                                                            <th scope="row">Daily</th>
-                                                            <td>137 AED</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th scope="row">2 to 7 Days</th>
-                                                            <td>134 AED</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th scope="row">7 to 20 Days</th>
-                                                            <td>133 AED</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th scope="row">More than 20 Days</th>
-                                                            <td>130 AED</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th scope="row">Deposit</th>
-                                                            <td>{{ rand(100, 999) }} AED</td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-
-                                            <!-- New Column (Additional Info/Badges) -->
-                                            <div class="col-12 col-sm-12 col-md-4 col-lg-2">
-                                                <div class="d-flex flex-column badge-container">
-                                                    <div>
-                                                        <span class="badge badge-neutral">
-                                                            <img src="{{ asset('assets/reserve/assets/images/gearbox.png') }}"
-                                                                alt="Gearbox Icon" class="icon mr-2"> A
-                                                        </span>
-                                                    </div>
-                                                    <div>
-                                                        <span class="badge badge-neutral">
-                                                            <img src="{{ asset('assets/reserve/assets/images/car-seat.png') }}"
-                                                                alt="Seat Icon" class="icon mr-2"> 5
-                                                        </span>
-                                                    </div>
-                                                    <div>
-                                                        <span class="badge badge-neutral">
-                                                            <img src="{{ asset('assets/reserve/assets/images/car-door.png') }}"
-                                                                alt="Door Icon" class="icon mr-2"> 4
-                                                        </span>
-                                                    </div>
-                                                    <div>
-                                                        <span class="badge badge-neutral">
-                                                            <img src="{{ asset('assets/reserve/assets/images/suitcases.png') }}"
-                                                                alt="Suitcase Icon" class="icon mr-2">
-                                                            {{ rand(1, 3) }}
-                                                        </span>
-                                                    </div>
-                                                    <div>
-                                                        <span class="badge badge-neutral">
-                                                            <img src="{{ asset('assets/reserve/assets/images/air.png') }}"
-                                                                alt="AC Icon" class="icon mr-2"> A/C
-                                                        </span>
-                                                    </div>
+                                <div class="card border-0 shadow-sm h-100 overflow-hidden">
+                                    <div class="row g-0">
+                                        <!-- Car Image -->
+                                        <div class="col-md-4 car-image-container p-3">
+                                            <div class="position-relative h-100">
+                                                <img src="{{ $car->carModel->images ? asset('assets/car-pics/' . $car->carModel->images->file_name) : asset('assets/car-pics/car test.webp') }}"
+                                                    class="img-fluid rounded-3 car-img"
+                                                    alt="{{ $car->carModel->brand }}">
+                                                <div class="position-absolute bottom-0 start-0 end-0 p-2 text-center">
+                                                    <span class="badge bg-dark bg-opacity-10 text-dark fs-6 fw-normal">
+                                                        {{ $car->manufacturing_year }} مدل
+                                                    </span>
                                                 </div>
                                             </div>
+                                        </div>
 
-                                            <!-- Badges (Existing Column) -->
-                                            <div class="col-12 col-sm-12 col-md-4 col-lg-2">
-                                                <div class="d-flex flex-column badge-container">
-                                                    <div>
-                                                        <span class="badge badge-success">
-                                                            <img src="{{ asset('assets/reserve/assets/images/car-insurance.png') }}"
-                                                                alt="Gearbox Icon" class="icon mr-2"> Insurance
-                                                            included
-                                                        </span>
-                                                    </div>
-                                                    <div>
-                                                        <span class="badge badge-success">
-                                                            <img src="{{ asset('assets/reserve/assets/images/car-seat.png') }}"
-                                                                alt="Seat Icon" class="icon mr-2"> Minimum 2 Days
-                                                            Rental
+                                        <!-- Car Details -->
+                                        <div class="col-md-8">
+                                            <div class="card-body p-4">
+                                                <!-- Header -->
+                                                <div class="d-flex justify-content-between align-items-start mb-3">
+                                                    <h3 class="card-title fw-bold mb-0">
+                                                        {{ $car->carModel->brand }}
+                                                        <span class="text-danger">{{ $car->carModel->model }}</span>
+                                                    </h3>
+                                                    <!-- New selection button -->
+                                                    <button type="button"
+                                                        class="btn btn-select-car {{ $selectedCar?->id === $car->id ? 'selected' : '' }}"
+                                                        wire:click="selectCar({{ $car->id }})">
+                                                        @if ($selectedCar?->id === $car->id)
+                                                            <i class="fas fa-check-circle me-1"></i> انتخاب شده
+                                                        @else
+                                                            <i class="fas fa-car me-1"></i> انتخاب خودرو
+                                                        @endif
+                                                    </button>
+                                                </div>
 
-                                                        </span>
-                                                    </div>
-
-                                                    <div>
-                                                        <span class="badge badge-success">
-                                                            <img src="{{ asset('assets/reserve/assets/images/speed.png') }}"
-                                                                alt="AC Icon" class="icon mr-2"> Unlimited Mileage
-                                                        </span>
-                                                    </div>
-
-                                                    <div>
-                                                        <span class="badge badge-info">
-                                                            <img src="{{ asset('assets/reserve/assets/images/check-mark.png') }}"
-                                                                alt="Door Icon" class="icon mr-2"> Free cancellation
-                                                        </span>
-                                                    </div>
-                                                    <div>
-                                                        <span class="badge badge-danger">
-                                                            <img src="{{ asset('assets/reserve/assets/images/check-mark.png') }}"
-                                                                alt="Suitcase Icon" class="icon mr-2"> No Deposit
-                                                        </span>
+                                                <!-- Pricing -->
+                                                <div class="pricing-card mb-4">
+                                                    <div class="row g-2">
+                                                        <div class="col-6 col-md-3">
+                                                            <div class="price-box bg-light rounded p-2 text-center">
+                                                                <div class="text-muted small">1-6 روز</div>
+                                                                <div class="fw-bold text-danger fs-5">
+                                                                    {{ $car->price_per_day_short }} درهم</div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-6 col-md-3">
+                                                            <div class="price-box bg-light rounded p-2 text-center">
+                                                                <div class="text-muted small">7-20 روز</div>
+                                                                <div class="fw-bold text-danger fs-5">
+                                                                    {{ $car->price_per_day_mid }} درهم</div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-6 col-md-3">
+                                                            <div class="price-box bg-light rounded p-2 text-center">
+                                                                <div class="text-muted small">+20 روز</div>
+                                                                <div class="fw-bold text-danger fs-5">
+                                                                    {{ $car->price_per_day_long }} درهم</div>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
+
+                                                <!-- Features & Badges -->
+                                                @php
+                                                    $optionColors = [
+                                                        'gear' => 'text-primary',
+                                                        'seats' => 'text-info',
+                                                        'doors' => 'text-warning',
+                                                        'luggage' => 'text-secondary',
+                                                        'base_insurance' => 'text-success',
+                                                        'min_days' => 'text-dark',
+                                                        'unlimited_km' => 'text-purple',
+                                                        'fuel_type' => 'text-danger',
+                                                        'engine_size' => 'text-muted',
+                                                        'cruise_control' => 'text-info',
+                                                        'air_conditioning' => 'text-blue',
+                                                    ];
+                                                @endphp
+                                                @php
+                                                    $optionMap = [
+                                                        'gear' => [
+                                                            'icon' => 'fas fa-cog',
+                                                            'labels' => [
+                                                                'automatic' => 'اتوماتیک',
+                                                                'manual' => 'دنده‌ای',
+                                                            ],
+                                                        ],
+                                                        'seats' => [
+                                                            'icon' => 'fas fa-user-friends',
+                                                            'label_suffix' => ' صندلی',
+                                                        ],
+                                                        'doors' => [
+                                                            'icon' => 'fas fa-door-open',
+                                                            'label_suffix' => ' درب',
+                                                        ],
+                                                        'luggage' => [
+                                                            'icon' => 'fas fa-suitcase',
+                                                            'label_suffix' => ' چمدان',
+                                                        ],
+                                                        'base_insurance' => [
+                                                            'icon' => 'fas fa-shield-alt',
+                                                            'label' => 'بیمه پایه',
+                                                        ],
+                                                        'min_days' => [
+                                                            'icon' => 'fas fa-calendar-day',
+                                                            'label_suffix' => ' روز حداقل',
+                                                        ],
+                                                        'unlimited_km' => [
+                                                            'icon' => 'fas fa-infinity',
+                                                            'label' => 'مسافت نامحدود',
+                                                        ],
+                                                        'fuel_type' => [
+                                                            'icon' => 'fas fa-gas-pump',
+                                                            'labels' => [
+                                                                'petrol' => 'بنزینی',
+                                                                'diesel' => 'دیزلی',
+                                                                'hybrid' => 'هیبرید',
+                                                                'electric' => 'الکتریکی',
+                                                            ],
+                                                        ],
+                                                        'engine_size' => [
+                                                            'icon' => 'fas fa-tachometer-alt',
+                                                            'label_suffix' => ' cc حجم موتور',
+                                                        ],
+                                                        'cruise_control' => [
+                                                            'icon' => 'fas fa-road',
+                                                            'label' => 'کروز کنترل',
+                                                        ],
+                                                        'air_conditioning' => [
+                                                            'icon' => 'fas fa-fan',
+                                                            'label' => 'تهویه مطبوع',
+                                                        ],
+                                                    ];
+                                                @endphp
+
+
+
+                                                <div class="features-section">
+                                                    <div class="d-flex flex-wrap gap-2">
+                                                        @foreach ($car->options as $option)
+                                                            @php
+                                                                $key = $option->option_key;
+                                                                $value = $option->option_value;
+                                                                $map = $optionMap[$key] ?? null;
+                                                            @endphp
+
+                                                            @if ($map)
+                                                                <div class="feature-badge">
+                                                                    <i
+                                                                        class="{{ $map['icon'] }} m-1 {{ $optionColors[$key] ?? 'text-muted' }}"></i>
+
+                                                                    @if (isset($map['labels']) && is_array($map['labels']))
+                                                                        {{-- اگر متن گزینه‌ها مشخصه مثل gear یا fuel_type --}}
+                                                                        {{ $map['labels'][$value] ?? $value }}
+                                                                    @elseif(isset($map['label']))
+                                                                        {{-- متن ثابت --}}
+                                                                        {{ $map['label'] }}
+                                                                    @elseif(isset($map['label_suffix']))
+                                                                        {{-- مقدار عددی + پسوند --}}
+                                                                        {{ $value }}{{ $map['label_suffix'] }}
+                                                                    @else
+                                                                        {{ $value }}
+                                                                    @endif
+                                                                </div>
+                                                            @endif
+                                                        @endforeach
+                                                    </div>
+                                                </div>
+
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-
-
-                            </label>
+                            </div>
                         @endforeach
                     </div>
-                    <div class="bad-feedback-car bad-feedback d-none">Please choose a car.</div>
+
+
+                    <div class="bad-feedback-car bad-feedback d-none">لطفاً یک خودرو انتخاب کنید.</div>
                 </div>
                 <!-- End car-step -->
 
-                <!-- Start review step -->
-                <div class="step step-3 row review-step d-none">
-                    <header class="col-12">
-                        <h1>Review and Confirm</h1>
-                        <p class="lead">Please review your information and confirm your booking.</p>
+
+                <!-- Start addons step -->
+                <div class="step step-4 row review-step d-none" wire:ignore.self>
+
+
+                    <header class="col-12 mb-5">
+                        <h1>خدمات و تأیید نهایی</h1>
+                        <p class="lead text-muted">
+                            لطفاً هزینه‌های زیر را مرور کرده و در صورت تأیید، برای نهایی کردن رزرو اقدام کنید.
+                        </p>
                     </header>
 
-                    <!-- Display Profile Info -->
-                    <div class="col-12 mb-3">
-                        <h4>Profile Information</h4>
-                        <ul class="list-group">
-                            <li class="list-group-item"><strong>First Name:</strong> {{ $first_name }}</li>
-                            <li class="list-group-item"><strong>Last Name:</strong> {{ $last_name }}</li>
-                            <li class="list-group-item"><strong>Email:</strong> {{ $email }}</li>
-                            <li class="list-group-item"><strong>Phone:</strong> {{ $phone }}</li>
+                    <!-- خدمات و تجهیزات -->
+                    <div class="col-12 mb-4">
+                        <h4 class="mb-3">
+                            <i class="fa fa-tools text-danger ms-2"></i>
+                            خدمات و تجهیزات انتخابی
+                        </h4>
+                        <div class="g-3">
+
+                            @foreach ($services as $serviceId => $service)
+                                <div class="col-md-4">
+                                    <div class="card shadow-sm border-0">
+                                        <div class="card-body d-flex justify-content-between align-items-center">
+                                            <div class="d-flex align-items-center gap-3">
+                                                <input class="form-check-input ms-2" type="checkbox"
+                                                    wire:model.live="selected_services" name="selected_services[]"
+                                                    value="{{ $serviceId }}" id="{{ $serviceId }}">
+                                                <label for="{{ $serviceId }}"
+                                                    class="d-flex align-items-center m-0">
+                                                    <i class="fa {{ $service['icon'] }} text-primary ms-2 fs-5"></i>
+                                                    <span class="fw-semibold">{{ $service['label'] }}</span>
+                                                </label>
+                                            </div>
+                                            <small class="text-muted">
+                                                @if ($service['amount'] == 0)
+                                                    <span class="badge bg-success">رایگان</span>
+                                                @else
+                                                    {{ number_format($service['amount']) }} درهم
+                                                    @if ($service['per_day'])
+                                                        /روز
+                                                    @endif
+                                                @endif
+                                            </small>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+
+                            @isset($selectedCar)
+                                {{-- بیمه LDW --}}
+                                <div class="col-md-4">
+                                    <div class="card shadow-sm border-0">
+                                        <div class="card-body d-flex justify-content-between align-items-center">
+                                            <div class="d-flex align-items-center gap-3">
+                                                <input type="radio" class="form-check-input ms-2"
+                                                    wire:model.live="selected_insurance" name="insurance"
+                                                    {{-- نام گروه --}} value="ldw_insurance" id="ldw_insurance">
+                                                <label for="ldw_insurance" class="d-flex align-items-center m-0">
+                                                    <i class="fa fa-car-burst text-primary ms-2 fs-5"></i>
+                                                    <span class="fw-semibold">بیمه LDW</span>
+                                                </label>
+                                            </div>
+                                            <small class="text-muted">
+                                                @if ($selectedCar->ldw_price == 0)
+                                                    <span class="badge bg-success">رایگان</span>
+                                                @else
+                                                    {{ number_format($selectedCar->ldw_price) }} درهم /روز
+                                                @endif
+                                            </small>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {{-- بیمه SCDW --}}
+                                <div class="col-md-4">
+                                    <div class="card shadow-sm border-0">
+                                        <div class="card-body d-flex justify-content-between align-items-center">
+                                            <div class="d-flex align-items-center gap-3">
+                                                <input type="radio" class="form-check-input ms-2"
+                                                    wire:model.live="selected_insurance" name="insurance"
+                                                    value="scdw_insurance" id="scdw_insurance">
+                                                <label for="scdw_insurance" class="d-flex align-items-center m-0">
+                                                    <i class="fa fa-lock text-primary ms-2 fs-5"></i>
+                                                    <span class="fw-semibold">بیمه کامل SCDW</span>
+                                                </label>
+                                            </div>
+                                            <small class="text-muted">
+                                                @if ($selectedCar->scdw_price == 0)
+                                                    <span class="badge bg-success">رایگان</span>
+                                                @else
+                                                    {{ number_format($selectedCar->scdw_price) }} درهم /روز
+                                                @endif
+                                            </small>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endisset
+
+                        </div>
+                    </div>
+
+
+                    <!-- شرایط و ضوابط -->
+                    <div class="col-12 mb-4">
+                        <h4 class="mb-3">
+                            <i class="fa fa-file-contract text-warning ms-2"></i>
+                            شرایط و ضوابط
+                        </h4>
+                        <p class="text-muted">
+                            با تأیید رزرو، موارد زیر را می‌پذیرید:
+                        </p>
+                        <ul class="list-group list-group-flush shadow-sm">
+                            <li class="list-group-item">
+                                <i class="fa fa-hand-holding-usd text-secondary ms-2"></i>
+                                برای اطمینان از تحویل خودرو در محل هماهنگ‌شده، ودیعه‌ای بابت خلافی از مشتری دریافت
+                                می‌شود. این مبلغ برای پوشش هزینه‌های احتمالی نظیر عوارض، جریمه و ... استفاده می‌شود.
+                            </li>
+                            <li class="list-group-item">
+                                <i class="fa fa-undo text-success ms-2"></i>
+                                ودیعه‌ی موقت، ۴ روز کاری پس از عودت خودرو و پس از کسر مواردی مانند جریمه، سالیک، بنزین،
+                                به حساب مشتری در امارات یا ایران بازگردانده می‌شود.
+                            </li>
+                            <li class="list-group-item">
+                                <i class="fa fa-receipt text-danger ms-2"></i>
+                                کلیه هزینه‌های مربوط به جریمه، سالیک، سوخت، کارواش احتمالی، پارکینگ عمومی و فرودگاه بر
+                                عهده مشتری است.
+                            </li>
+                            <li class="list-group-item">
+                                <i class="fa fa-user-shield text-primary ms-2"></i>
+                                تمامی پرداخت‌ها و بازپرداخت‌ها تنها به نام فردی که قرارداد اجاره را امضا کرده انجام
+                                می‌شود. در صورت رزرو توسط شخص دیگر، بازپرداخت‌ها همچنان به نام صاحب قرارداد صورت خواهد
+                                گرفت.
+                            </li>
                         </ul>
                     </div>
 
-                    <!-- Display Pickup & Return Info -->
-                    <div class="col-12 mb-3">
-                        <h4>Pickup and Return Details</h4>
-                        <ul class="list-group">
-                            <li class="list-group-item"><strong>Pickup Location:</strong> {{ $pickup_location }}</li>
-                            <li class="list-group-item"><strong>Return Location:</strong> {{ $return_location }}</li>
-                            <li class="list-group-item"><strong>Pickup Date:</strong> {{ $pickup_date }}</li>
-                            <li class="list-group-item"><strong>Return Date:</strong> {{ $return_date }}</li>
+
+                    <!-- تأیید نهایی -->
+                    <div class="col-12 mb-4">
+                        <h4 class="mb-3"><i class="fa fa-user-check text-success ms-2"></i>تأیید رزرو</h4>
+                        <p class="text-muted">لطفاً موارد زیر را بررسی و تأیید نمایید:</p>
+
+                        {{-- <div class="form-check d-flex align-items-center mb-2 ps-0">
+                            <input type="checkbox" class="form-check-input m-2" id="confirm_deposit" />
+                            <label class="form-check-label text-dark" for="confirm_deposit">
+                                جزئیات ودیعه و پرداخت را تأیید می‌کنم.
+                            </label>
+                        </div> --}}
+                        <div id="confirm_deposit_error" class="invalid-feedback d-block text-danger text-end"></div>
+
+                        <div class="form-check d-flex align-items-center mb-2 ps-0">
+                            <input type="checkbox" class="form-check-input m-2" id="accept_terms" />
+                            <label class="form-check-label text-dark" for="accept_terms">
+                                شرایط و ضوابط را می‌پذیرم.
+                            </label>
+                        </div>
+                        <div id="accept_terms_error" class="invalid-feedback d-block text-danger text-end"></div>
+                    </div>
+                </div>
+                <!-- End addons step -->
+
+
+                <!-- Start review step -->
+                <div class="step step-3 row review-step d-none" wire:ignore.self>
+
+                    <header class="col-12 mb-5">
+                        <h1>مرور نهایی اطلاعات رزرو</h1>
+                        <p class="lead text-muted">
+                            لطفاً جزئیات زیر را با دقت بررسی کنید و در صورت صحت، به مرحله بعدی بروید.
+                        </p>
+                    </header>
+
+                    <!-- پیش‌فاکتور هزینه‌ها -->
+                    <div class="col-12 mb-5">
+                        <h4 class="text-xl text-gray-800 mb-3 flex items-center gap-2">
+                            <i class="fas fa-file-invoice-dollar text-blue-600"></i> پیش‌فاکتور هزینه‌ها
+                        </h4>
+                        <ul class="list-group shadow-sm rounded-lg overflow-hidden">
+
+                            {{-- هزینه اجاره خودرو --}}
+                            @if ($selectedCar)
+                                @php
+                                    $days = $rental_days ?? 1;
+
+                                    if ($days >= 21) {
+                                        $dailyRate = $selectedCar->price_per_day_long;
+                                    } elseif ($days >= 7) {
+                                        $dailyRate = $selectedCar->price_per_day_mid;
+                                    } else {
+                                        $dailyRate = $selectedCar->price_per_day_short;
+                                    }
+
+                                    $carCost = $dailyRate * $days;
+                                @endphp
+                                <li class="list-group-item d-flex justify-content-between align-items-center text-success"
+                                    style="background:#fefefe; border-bottom:2px solid #ccc;">
+                                    <div>
+                                        <i class="fas fa-car text-blue-600 text-dark ms-2"></i>
+                                        هزینه اجاره خودرو (× {{ $days }} روز)
+                                    </div>
+                                    <span class="badge bg-success rounded-pill px-3 py-2" style="font-size:1rem;">
+                                        {{ number_format($carCost) }} درهم
+                                    </span>
+                                </li>
+                            @endif
+
+
+                            {{-- هزینه انتقال تحویل --}}
+                            <li class="list-group-item d-flex justify-content-between align-items-center"
+                                style="background:#fefefe; border-bottom:1px solid #eee;">
+                                <div>
+                                    <i class="fas fa-location-arrow text-blue-600 ms-2"></i>
+                                    هزینه انتقال (تحویل)
+                                </div>
+                                <span class="badge bg-primary rounded-pill px-3 py-2" style="font-size:1rem;">
+                                    {{ number_format($this->transferCosts['pickup']) }} درهم
+                                </span>
+                            </li>
+
+                            {{-- هزینه انتقال بازگشت --}}
+                            <li class="list-group-item d-flex justify-content-between align-items-center"
+                                style="background:#fefefe; border-bottom:1px solid #eee;">
+                                <div>
+                                    <i class="fas fa-undo-alt text-blue-600 ms-2"></i>
+                                    هزینه انتقال (بازگشت)
+                                </div>
+                                <span class="badge bg-primary rounded-pill px-3 py-2" style="font-size:1rem;">
+                                    {{ number_format($this->transferCosts['return']) }} درهم
+                                </span>
+                            </li>
+
+                            {{-- جمع هزینه انتقال --}}
+                            <li class="list-group-item d-flex justify-content-between align-items-center fw-semibold text-success"
+                                style="background:#fefefe; border-bottom:2px solid #ccc;">
+                                <div>جمع هزینه انتقال</div>
+                                <span class="badge bg-success rounded-pill px-3 py-2" style="font-size:1rem;">
+                                    {{ number_format($this->transferCosts['total']) }} درهم
+                                </span>
+                            </li>
+
+
+                            @if (!empty($selected_services) || $selected_insurance)
+
+
+                                {{-- سپس سایر سرویس‌های checkbox --}}
+                                @foreach ($selected_services as $serviceId)
+                                    @php
+                                        $service = $services[$serviceId] ?? null;
+                                        $days = $rental_days ?? 1;
+                                        $price = $service['per_day'] ? $service['amount'] * $days : $service['amount'];
+                                    @endphp
+
+                                    @if ($service)
+                                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                                            <div>
+                                                <i class="fa {{ $service['icon'] }} ms-2 fs-5"></i>
+                                                {{ $service['label'] }}
+                                                @if ($service['per_day'])
+                                                    (× {{ $days }} روز)
+                                                @endif
+                                            </div>
+                                            <span class="badge bg-primary rounded-pill px-3 py-2">
+                                                {{ number_format($price) }} درهم
+                                            </span>
+                                        </li>
+                                    @endif
+                                @endforeach
+                                {{-- اول بیمهٔ انتخاب‌شده (radio) --}}
+                                @if ($selected_insurance)
+                                    @php
+                                        // تشخیص عنوان و قیمت بیمه‌ی انتخابی
+                                        if ($selected_insurance === 'ldw_insurance') {
+                                            $label = 'بیمه LDW';
+                                            $price = $selectedCar->ldw_price;
+                                        } elseif ($selected_insurance === 'scdw_insurance') {
+                                            $label = 'بیمه کامل SCDW';
+                                            $price = $selectedCar->scdw_price;
+                                        }
+                                        $days = $rental_days ?? 1;
+                                        $totalPrice = $price * $days;
+                                    @endphp
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <i class="fa fa-car-burst ms-2 fs-5"></i>
+                                            {{ $label }} (× {{ $days }} روز)
+                                        </div>
+                                        <span class="badge bg-primary rounded-pill px-3 py-2">
+                                            {{ number_format($totalPrice) }} درهم
+                                        </span>
+                                    </li>
+                                @endif
+                                {{-- جمع کل --}}
+                                <li
+                                    class="list-group-item d-flex justify-content-between align-items-center fw-semibold text-success">
+                                    <div>جمع کل خدمات و بیمه</div>
+                                    <span class="badge bg-success rounded-pill px-3 py-2">
+                                        {{ number_format($services_total) }} درهم
+                                    </span>
+                                </li>
+                            @endif
+
+
+                            {{-- محاسبه کل نهایی (انتقال + اجاره خودرو + خدمات) --}}
+                            @php
+                                $transferTotal = $this->transferCosts['total'] ?? 0;
+                                $servicesTotal = $services_total ?? 0;
+                                $rentalTotal = isset($carCost) ? $carCost : 0;
+                                $invoiceTotal = $transferTotal + $rentalTotal + $servicesTotal;
+                                // محاسبه مالیات ۵٪
+                                $taxAmount = round($invoiceTotal * 0.05);
+                                $totalWithTax = $invoiceTotal + $taxAmount;
+                            @endphp
+                            <li class="list-group-item d-flex justify-content-between align-items-center fw-bold text-white"
+                                style="background:#007bff;">
+                                <div>جمع کل نهایی</div>
+                                <span class="badge bg-white text-primary rounded-pill px-3 py-2"
+                                    style="font-size:1rem;">
+                                    {{ number_format($invoiceTotal) }} درهم
+                                </span>
+                            </li>
+
+                            {{-- مالیات ۵٪ --}}
+                            <li class="list-group-item d-flex justify-content-between align-items-center"
+                                style="background:#fefefe; border-bottom:1px solid #eee;">
+                                <div>مالیات (۵٪)</div>
+                                <span class="badge bg-warning text-dark rounded-pill px-3 py-2"
+                                    style="font-size:1rem;">
+                                    {{ number_format($taxAmount) }} درهم
+                                </span>
+                            </li>
+
+                            {{-- جمع کل با مالیات --}}
+                            <li class="list-group-item d-flex justify-content-between align-items-center fw-semibold text-success"
+                                style="background:#fefefe; border-bottom:2px solid #ccc;">
+                                <div>جمع کل با مالیات</div>
+                                <span class="badge bg-success rounded-pill px-3 py-2" style="font-size:1rem;">
+                                    {{ number_format($totalWithTax) }} درهم
+                                </span>
+                            </li>
+
                         </ul>
                     </div>
 
-                    <!-- Display Selected Car -->
-                    <div class="col-12 mb-3">
-                        <h4>Selected Car</h4>
+                    <!-- جزئیات تحویل و بازگشت -->
+                    <div class="col-12 mb-5">
+                        <h4 class="text-xl text-gray-800 mb-3 flex items-center gap-2">
+                            <i class="fas fa-calendar-alt text-blue-600"></i> جزئیات تحویل و بازگشت
+                        </h4>
+                        <ul class="list-group overflow-hidden">
+                            <li class="list-group-item border-bottom">
+                                <strong>محل تحویل:</strong> {{ $pickup_location }}
+                            </li>
+                            <li class="list-group-item border-bottom">
+                                <strong>محل بازگشت:</strong> {{ $return_location }}
+                            </li>
+                            <li class="list-group-item border-bottom">
+                                <strong>تاریخ تحویل:</strong>
+                                {{ \Carbon\Carbon::parse($pickup_date)->format('Y/m/d H:i') }}
+                            </li>
+                            <li class="list-group-item">
+                                <strong>تاریخ بازگشت:</strong>
+                                {{ \Carbon\Carbon::parse($return_date)->format('Y/m/d H:i') }}
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- خودروی انتخاب‌شده -->
+                    <div class="col-12 mb-5">
+                        <h4 class="text-xl text-gray-800 mb-3 flex gap-2">
+                            <i class="fas fa-car-side text-blue-600"></i> خودروی انتخاب شده
+                        </h4>
                         @if ($selectedCar)
-                            <div class="card">
-                                <img src="{{ $selectedCar->carModel->images ? asset('assets/car-pics/' . $selectedCar->carModel->images->file_name) : asset('assets/car-pics/car test.webp') }}"
-                                    class="card-img-top" alt="Car Image">
-                                <div class="card-body">
-                                    <h5 class="card-title">{{ $selectedCar->carModel->brand }}
-                                        {{ $selectedCar->carModel->model }}
+                            <div class="overflow-hidden" style="max-width: 400px">
+                                <img src="{{ $selectedCar->carModel->images
+                                    ? asset('assets/car-pics/' . $selectedCar->carModel->images->file_name)
+                                    : asset('assets/car-pics/car test.webp') }}"
+                                    alt="Car Image" style="width: 100%; height: auto; object-fit: cover;" />
+                                <div class="card-body p-4">
+                                    <h5 class="card-title text-lg font-semibold text-gray-900 mb-2">
+                                        {{ $selectedCar->carModel->brand }} {{ $selectedCar->carModel->model }}
                                     </h5>
-                                    <p class="card-text">Year: {{ $selectedCar->manufacturing_year }}</p>
+                                    <p class="card-text text-gray-700">
+                                        سال ساخت: {{ $selectedCar->manufacturing_year }}
+                                    </p>
                                 </div>
                             </div>
                         @else
-                            <p>No car selected.</p>
+                            <p class="text-center text-gray-600 mt-4">هیچ خودرویی انتخاب نشده است.</p>
                         @endif
                     </div>
 
                 </div>
                 <!-- End review step -->
 
-
-                <!-- Start addons step -->
-                <div class="step step-4 row review-step d-none">
-                    <header class="col-12">
-                        <h1>Review and Confirm</h1>
-                        <p class="lead">Please review your payment and terms, and confirm your booking.</p>
+                <!-- Start profile info step -->
+                <div class="step row review-step d-none" wire:ignore.self>
+                    <header class="col-12 mb-5">
+                        <h1 class="text-2xl font-bold text-gray-800 flex items-center justify-center gap-2">
+                            اطلاعات شخصی
+                        </h1>
+                        <p class="text-gray-600 mt-2">لطفاً نام، ایمیل و شماره تماس خود را وارد کنید</p>
                     </header>
 
-                    <!-- Display Deposit Information -->
-                    <div class="col-12 mb-3">
-                        <h4>Deposit and Payment Details</h4>
-                        <ul class="list-group">
-                            <li class="list-group-item"><strong>Deposit Amount:</strong> 50,000,000 تومان</li>
-                            <li class="list-group-item"><strong>Damage Deposit (Check):</strong> 800,000,000 تومان</li>
-                            <li class="list-group-item"><strong>Total Deposit:</strong> 150,000,000 تومان (based on
-                                provided documents)</li>
-                            <li class="list-group-item"><strong>Reservation Fee:</strong> 5,150,000 تومان</li>
-                            <li class="list-group-item"><strong>Total Payment:</strong> {{ rand(100000, 999999) }}
-                                تومان</li>
-                            <input type="hidden" name="total_price" value="{{ rand(100000, 999999) }}">
-                        </ul>
+                    <div class="col-12 col-md-6 mb-4">
+                        <label for="first_name"
+                            class="form-label text-gray-700 font-semibold flex items-center gap-1">
+                            <i class="fas fa-user text-blue-400 w-5 h-5"></i>
+                            نام
+                        </label>
+                        <input type="text" id="first_name" class="form-control rounded-md" name="first_name"
+                            wire:model="first_name" placeholder="نام " />
+                        <div class="invalid-feedback">وارد کردن نام الزامی است!</div>
                     </div>
 
-                    <!-- Display Terms and Conditions -->
-                    <div class="col-12 mb-3">
-                        <h4>Terms and Conditions</h4>
-                        <p>Please review the terms and conditions of the contract. By confirming your booking, you
-                            accept the following conditions:</p>
-                        <ul class="list-group">
-                            <li class="list-group-item">Condition 1: The deposit is refundable upon return of the car
-                                in good condition.</li>
-                            <li class="list-group-item">Condition 2: Any damage to the car will result in a deduction
-                                from the damage deposit.</li>
-                            <li class="list-group-item">Condition 3: Late returns will incur additional charges as per
-                                the rental agreement.</li>
-                        </ul>
+                    <div class="col-12 col-md-6 mb-4">
+                        <label for="last_name" class="form-label text-gray-700 font-semibold flex items-center gap-1">
+                            <i class="fas fa-user text-blue-400 w-5 h-5"></i>
+                            نام خانوادگی
+                        </label>
+                        <input type="text" id="last_name" class="form-control rounded-md" name="last_name"
+                            wire:model="last_name" placeholder="نام خانوادگی" />
+                        <div class="invalid-feedback">وارد کردن نام خانوادگی الزامی است!</div>
                     </div>
 
-                    <!-- Display Confirmation Section -->
-                    <div class="col-12">
-                        <h4>Confirm Your Booking</h4>
-                        <p>Please confirm that you have reviewed all the details and agree to the terms and conditions.
-                        </p>
+                    <div class="col-12 col-md-6 mb-4">
+                        <label for="email" class="form-label text-gray-700 font-semibold flex items-center gap-1">
+                            <i class="fas fa-envelope text-blue-400 w-5 h-5"></i>
+                            آدرس ایمیل
+                        </label>
+                        <input type="email" id="email" class="form-control rounded-md" name="email"
+                            wire:model="email" placeholder="name@example.com" />
+                        <div class="invalid-feedback">ایمیل معتبر الزامی است!</div>
+                    </div>
 
-                        <!-- Checkboxes for Confirmation -->
-                        <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="confirm_deposit" />
-                            <label class="form-check-label" for="confirm_deposit">I confirm the deposit and payment
-                                details.</label>
-                            <div class="invalid-feedback">Confirmation of the deposit is required!</div>
+                    <div class="col-12 col-md-6 mb-4">
+                        <label for="phone" class="form-label text-gray-700 font-semibold flex items-center gap-1">
+                            <i class="fas fa-phone text-blue-400 w-5 h-5"></i>
+                            شماره تماس
+                        </label>
+                        <input type="tel" id="phone" class="form-control rounded-md" name="phone"
+                            wire:model="phone" placeholder="مثال: 09123456789" />
+                        <div class="invalid-feedback">وارد کردن شماره تماس الزامی است!</div>
+                    </div>
 
-                        </div>
-                        <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="accept_terms" />
-                            <label class="form-check-label" for="accept_terms">I accept the terms and
-                                conditions.</label>
-                            <div class="invalid-feedback">Acceptance of terms and conditions is required!</div>
-                        </div>
-
+                    <div class="col-12 col-md-6 mb-4">
+                        <label for="messenger_phone"
+                            class="form-label text-gray-700 font-semibold flex items-center gap-1">
+                            <i class="fab fa-telegram text-blue-400 w-5 h-5"></i>
+                            شماره تلگرام/واتساپ
+                        </label>
+                        <input type="tel" id="messenger_phone" class="form-control rounded-md"
+                            name="messenger_phone" wire:model="messenger_phone" placeholder="مثال: 09123456789" />
+                        <div class="invalid-feedback">وارد کردن شماره پیام‌رسان الزامی است!</div>
                     </div>
                 </div>
-                <!-- End addons step -->
+                <!-- End profile info step -->
 
-                <div class="next-step mt-5 d-flex align-items-center">
-                    <button type="button" id="back" class="fw-bold btn">Go Back</button>
-
-                    <button type="button" id="next" class="btn btn-red ms-auto">Next Step</button>
+                <!-- تغییر جهت دکمه‌ها برای RTL -->
+                <div class="next-step mt-5 d-flex align-items-center" wire:ignore.self>
+                    <button type="button" id="next" class="btn btn-red">مرحله بعد</button>
+                    <button type="button" id="back" class="fw-bold btn me-2">بازگشت</button>
                 </div>
 
             </form>
-            <!-- Start thanks step -->
+            <!-- Start thanks step - ترجمه -->
             <div class="thanks-step step d-flex align-items-center col-md-8 d-none">
                 <header class="d-flex flex-column align-items-center text-center">
-                    <!-- Thank You Icon -->
                     <img class="w-50 mb-4" src="{{ asset('assets/reserve/assets/images/icon-thank-you.svg') }}"
                         alt="Thank You Icon" />
-
-                    <!-- Title -->
-                    <h1 class="display-4">Thank You for Your Booking!</h1>
-
-                    <!-- Message -->
+                    <h1 class="display-4">سپاس از رزرو شما!</h1>
                     <p class="text-center lead mb-4">
-                        Your rental request has been successfully submitted to our system. Our experts will contact you
-                        soon
-                        for confirmation and further details.
+                        درخواست اجاره شما با موفقیت ثبت شد. کارشناسان ما به زودی برای تایید و اطلاعات بیشتر با شما تماس
+                        خواهند گرفت.
                     </p>
-
-                    <!-- Additional Instructions -->
                     <div class="alert alert-secondary w-100 mb-4" role="alert">
-                        <strong>Note:</strong> Please keep an eye on your email for booking updates and confirmation
-                        from our team.
+                        <strong>توجه:</strong> لطفا ایمیل خود را برای دریافت به‌روزرسانی‌های رزرو بررسی کنید
                     </div>
-
-                    <!-- Support Information -->
-                    <p>If you need any assistance or have questions, don't hesitate to reach out to us:</p>
-                    <!-- Call to Action Button -->
-                    <a href="https://karaplusrental.com/" class="btn btn-primary mt-4">Back to Homepage</a>
+                    <p>در صورت نیاز به کمک می‌توانید با ما تماس بگیرید</p>
+                    <a href="https://karaplusrental.com/" class="btn btn-primary mt-4">بازگشت به صفحه اصلی</a>
                 </header>
             </div>
-
-            <!-- End thanks-step -->
         </div>
     </div>
 </div>
-
-
-@push('scripts')
-    <script>
-        $(document).ready(function() {
-            $('#pickup_date').persianDatepicker({
-                format: 'YYYY/MM/DD HH:mm',
-                timePicker: {
-                    enabled: true
-                },
-                autoClose: true
-            });
-
-            $('#pickup_date').on('change', function() {
-                @this.set('pickup_date', $(this).val());
-            });
-        });
-    </script>
-@endpush
