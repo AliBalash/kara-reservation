@@ -7,10 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     {{-- <meta name="csrf-token" content="{{ csrf_token() }}"> --}}
 
-    <!-- اضافه کردن فونت فارسی (Vazir) -->
-    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazir-font@v30.1.0/dist/font-face.css" rel="stylesheet"
-        type="text/css" />
-
     <link rel="icon" type="image/png" sizes="32x32"
         href="{{ asset('assets/reserve/assets/images/favicon-32x32.png') }}" />
     <!-- Bootstrap css file -->
@@ -182,17 +178,56 @@
             gap: 4px;
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
         }
+
+        
     </style>
     @stack('styles')
 
 </head>
 
 <body>
+    <!-- Header/Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm mb-4">
+        <div class="container">
+            <a class="navbar-brand" href="https://karaplusrental.com/">
+                <img src="{{ asset('assets/reserve/assets/images/logo.png') }}" width="100" alt="KARA Plus">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="نمایش منو">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://karaplusrental.com/">خانه</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://karaplusrental.com/about-us/">درباره ما</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://karaplusrental.com/contact-us/">تماس با ما</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
     <div>
         {{ $slot }}
     </div>
 
 
+
+    <!-- Footer -->
+    <footer class="mt-5">
+        <div class="container">
+            <p>&copy; {{ date('Y') }} تمامی حقوق محفوظ است | KARA Plus</p>
+        </div>
+    </footer>
 
     <!-- main js -->
     <script src="{{ asset('assets/reserve/js/main.js') }}" defer></script>

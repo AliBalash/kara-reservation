@@ -142,17 +142,19 @@
                                     <div class="row g-0">
                                         <!-- Car Image -->
                                         <div class="col-md-4 car-image-container p-3">
-                                            <div class="position-relative h-100">
-                                                <img src="{{ $car->carModel->images ? asset('assets/car-pics/' . $car->carModel->images->file_name) : asset('assets/car-pics/car test.webp') }}"
-                                                    class="img-fluid rounded-3 car-img"
+                                            <div class="ratio ratio-16x9 position-relative rounded-3 overflow-hidden">
+                                                <img loading="lazy"
+                                                    src="{{ $car->carModel->image ? 'https://mypanel.karaplusrental.com/assets/car-pics/' . $car->carModel->image->file_name : asset('assets/car-pics/car test.webp') }}"
+                                                    class="w-100 h-100 object-fit-cover"
                                                     alt="{{ $car->carModel->brand }}">
                                                 <div class="position-absolute bottom-0 start-0 end-0 p-2 text-center">
                                                     <span class="badge bg-dark bg-opacity-10 text-dark fs-6 fw-normal">
-                                                        {{ $car->manufacturing_year }} مدل
+                                                        مدل {{ $car->manufacturing_year }}
                                                     </span>
                                                 </div>
                                             </div>
                                         </div>
+
 
                                         <!-- Car Details -->
                                         <div class="col-md-8">
@@ -163,6 +165,15 @@
                                                         {{ $car->carModel->brand }}
                                                         <span class="text-danger">{{ $car->carModel->model }}</span>
                                                     </h3>
+
+                                                    <h1>
+                                                        @if ($car->carModel->is_featured)
+                                                            <span
+                                                                class="badge bg-warning text-dark position-absolute top-0 end-0 m-2">
+                                                                ویژه</span>
+                                                        @endif
+                                                    </h1>
+
                                                     <!-- New selection button -->
                                                     <button type="button"
                                                         class="btn btn-select-car {{ $selectedCar?->id === $car->id ? 'selected' : '' }}"
@@ -214,9 +225,28 @@
                                                         'unlimited_km' => 'text-purple',
                                                         'fuel_type' => 'text-danger',
                                                         'engine_size' => 'text-muted',
-                                                        'cruise_control' => 'text-info',
-                                                        'air_conditioning' => 'text-blue',
                                                     ];
+                                                @endphp
+
+                                                @php
+                                                    $optionPriority = [
+                                                        'engine_size',
+                                                        'unlimited_km',
+                                                        'base_insurance',
+                                                        'min_days',
+                                                        'seats',
+                                                        'doors',
+                                                        'luggage',
+                                                        'fuel_type',
+                                                    ];
+                                                @endphp
+                                                @php
+                                                    $sortedOptions = $car->options->sortBy(function ($option) use (
+                                                        $optionPriority,
+                                                    ) {
+                                                        $index = array_search($option->option_key, $optionPriority);
+                                                        return $index !== false ? $index : PHP_INT_MAX; // چیزایی که تو لیست نیستن آخر قرار می‌گیرن
+                                                    });
                                                 @endphp
                                                 @php
                                                     $optionMap = [
@@ -264,45 +294,45 @@
                                                             'icon' => 'fas fa-tachometer-alt',
                                                             'label_suffix' => ' cc حجم موتور',
                                                         ],
-                                                        'cruise_control' => [
-                                                            'icon' => 'fas fa-road',
-                                                            'label' => 'کروز کنترل',
-                                                        ],
-                                                        'air_conditioning' => [
-                                                            'icon' => 'fas fa-fan',
-                                                            'label' => 'تهویه مطبوع',
-                                                        ],
                                                     ];
                                                 @endphp
 
-
-
                                                 <div class="features-section">
-                                                    <div class="d-flex flex-wrap gap-2">
-                                                        @foreach ($car->options as $option)
+                                                    <div class="row g-3">
+                                                        @foreach ($sortedOptions as $option)
                                                             @php
                                                                 $key = $option->option_key;
                                                                 $value = $option->option_value;
                                                                 $map = $optionMap[$key] ?? null;
+
+                                                                // آیکن و رنگ را آماده کن
+                                                                $iconClass = $map['icon'] ?? 'fas fa-info-circle';
+                                                                $colorClass = $optionColors[$key] ?? 'text-muted';
+
+                                                                // متن نهایی
+                                                                if (isset($map['labels']) && is_array($map['labels'])) {
+                                                                    $text = $map['labels'][$value] ?? $value;
+                                                                } elseif (isset($map['label'])) {
+                                                                    $text = $map['label'];
+                                                                } elseif (isset($map['label_suffix'])) {
+                                                                    $text = $value . $map['label_suffix'];
+                                                                } else {
+                                                                    $text = $value;
+                                                                }
                                                             @endphp
 
-                                                            @if ($map)
-                                                                <div class="feature-badge">
-                                                                    <i
-                                                                        class="{{ $map['icon'] }} m-1 {{ $optionColors[$key] ?? 'text-muted' }}"></i>
-
-                                                                    @if (isset($map['labels']) && is_array($map['labels']))
-                                                                        {{-- اگر متن گزینه‌ها مشخصه مثل gear یا fuel_type --}}
-                                                                        {{ $map['labels'][$value] ?? $value }}
-                                                                    @elseif(isset($map['label']))
-                                                                        {{-- متن ثابت --}}
-                                                                        {{ $map['label'] }}
-                                                                    @elseif(isset($map['label_suffix']))
-                                                                        {{-- مقدار عددی + پسوند --}}
-                                                                        {{ $value }}{{ $map['label_suffix'] }}
-                                                                    @else
-                                                                        {{ $value }}
-                                                                    @endif
+                                                            @if ($map && $value && $value !== '0')
+                                                                <div class="col-6 col-md-4 col-lg-2">
+                                                                    <div
+                                                                        class="d-flex align-items-center gap-3 bg-white border rounded-3 p-2 shadow-sm h-100">
+                                                                        <div class="rounded-circle bg-light d-flex align-items-center justify-content-center"
+                                                                            style="width: 40px; height: 40px;">
+                                                                            <i
+                                                                                class="{{ $iconClass }} {{ $colorClass }}"></i>
+                                                                        </div>
+                                                                        <span
+                                                                            class="text-dark small fw-medium">{{ $text }}</span>
+                                                                    </div>
                                                                 </div>
                                                             @endif
                                                         @endforeach
@@ -688,7 +718,6 @@
                             </li>
                         </ul>
                     </div>
-
                     <!-- خودروی انتخاب‌شده -->
                     <div class="col-12 mb-5">
                         <h4 class="text-xl text-gray-800 mb-3 flex gap-2">
@@ -696,9 +725,10 @@
                         </h4>
                         @if ($selectedCar)
                             <div class="overflow-hidden" style="max-width: 400px">
-                                <img src="{{ $selectedCar->carModel->images
-                                    ? asset('assets/car-pics/' . $selectedCar->carModel->images->file_name)
-                                    : asset('assets/car-pics/car test.webp') }}"
+                                <img loading="lazy"
+                                    src="{{ $selectedCar->carModel->image
+                                        ? asset('assets/car-pics/' . $selectedCar->carModel->image->file_name)
+                                        : asset('assets/car-pics/car test.webp') }}"
                                     alt="Car Image" style="width: 100%; height: auto; object-fit: cover;" />
                                 <div class="card-body p-4">
                                     <h5 class="card-title text-lg font-semibold text-gray-900 mb-2">

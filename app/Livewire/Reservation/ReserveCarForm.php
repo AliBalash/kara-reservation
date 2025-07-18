@@ -151,7 +151,7 @@ class ReserveCarForm extends Component
 
     private function getUniqueModelCars($brand = null)
     {
-        $query = Car::with(['carModel', 'options']); // اینجا options رو هم میگیری
+        $query = Car::with(['carModel', 'options']);
 
         if ($brand) {
             $query->whereHas('carModel', function ($q) use ($brand) {
@@ -159,13 +159,27 @@ class ReserveCarForm extends Component
             });
         }
 
+        // گرفتن همه ماشین‌ها
         $cars = $query->get();
+
+        // مرتب‌سازی بر اساس اینکه مدلش `is_featured` باشه
+        $cars = $cars->sortByDesc(function ($car) {
+            return $car->carModel->is_featured;
+        });
+
+        // فقط یکی از هر مدل
         return $cars->unique('car_model_id')->values();
     }
 
     public function render()
     {
-        $brands = CarModel::distinct()->pluck('brand');
+        $brands = CarModel::distinct()
+            ->pluck('brand')
+            ->filter() // حذف null یا رشته‌های خالی
+            ->unique()
+            ->map(fn($brand) => ucwords(strtolower($brand))) // حروف اول بزرگ
+            ->sort()
+            ->values();
         return view('livewire.reservation.reserve-car-form', [
             'brands'   => $brands,
             'services' => $this->allServices,  // <-- اینجا
