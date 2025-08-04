@@ -165,7 +165,7 @@ class Contract extends Model
     // همه‌ی آیتم‌های قیمت
     public function charges()
     {
-        return $this->hasMany(contractCharges::class);
+        return $this->hasMany(ContractCharges::class);
     }
 
     // محاسبه مجموع مبلغ از روی آیتم‌ها

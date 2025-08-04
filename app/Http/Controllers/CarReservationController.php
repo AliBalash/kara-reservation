@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Contract;
-use App\Models\contractCharges;
+use App\Models\ContractCharges;
 use App\Models\Customer;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
@@ -215,7 +215,7 @@ class CarReservationController extends Controller
     // تابع ثبت هزینه‌ها در جدول contract_charges
     private function createContractCharges($contract, $basePrice, $serviceBreakdown, $pickupFee, $returnFee, $rentalDays)
     {
-        contractCharges::create([
+        ContractCharges::create([
             'contract_id' => $contract->id,
             'title' => 'هزینه پایه اجاره',
             'amount' => $basePrice,
@@ -224,7 +224,7 @@ class CarReservationController extends Controller
         ]);
 
         foreach ($serviceBreakdown as $svc) {
-            contractCharges::create([
+            ContractCharges::create([
                 'contract_id' => $contract->id,
                 'title' => $svc['label'],
                 'amount' => $svc['amount'],
@@ -236,7 +236,7 @@ class CarReservationController extends Controller
         }
 
         if ($pickupFee > 0) {
-            contractCharges::create([
+            ContractCharges::create([
                 'contract_id' => $contract->id,
                 'title' => 'هزینه مکان تحویل',
                 'amount' => $pickupFee,
@@ -246,7 +246,7 @@ class CarReservationController extends Controller
         }
 
         if ($returnFee > 0) {
-            contractCharges::create([
+            ContractCharges::create([
                 'contract_id' => $contract->id,
                 'title' => 'هزینه مکان بازگشت',
                 'amount' => $returnFee,
@@ -256,7 +256,7 @@ class CarReservationController extends Controller
         }
 
         if ($this->taxAmount > 0) {
-            contractCharges::create([
+            ContractCharges::create([
                 'contract_id' => $contract->id,
                 'title' => 'مالیات',
                 'amount' => $this->taxAmount,
