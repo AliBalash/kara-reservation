@@ -297,30 +297,34 @@ function isValidPhone(phoneField) {
 }
 function isValidMessengerPhone(phoneField) {
   let validMessengerPhone = true;
-  let re = /^09\d{9}$/; // Regex baraye shomare haye Iran
-  let feedbackElement = phoneField.nextElementSibling; // Element ba class 'invalid-feedback'
+  const re = /^\d{10,15}$/; // فقط عدد، بین 10 تا 15 رقم
+
+  let feedbackElement = phoneField.nextElementSibling;
 
   if (!re.test(phoneField.value)) {
     validMessengerPhone = false;
     phoneField.classList.remove("is-valid");
     phoneField.classList.add("is-invalid");
 
-    // Update message bar asas khata
-    if (phoneField.value.length < 11) {
-      feedbackElement.textContent = "شماره مسنجر باید ۱۱ رقمی باشد!";
-    } else if (!phoneField.value.startsWith("09")) {
-      feedbackElement.textContent = "شماره مسنجر باید با ۰۹ شروع شود.";
+    // پیام خطا
+    if (phoneField.value.length < 10) {
+      feedbackElement.textContent = "شماره باید حداقل ۱۰ رقم باشد.";
+    } else if (phoneField.value.length > 15) {
+      feedbackElement.textContent = "شماره نباید بیشتر از ۱۵ رقم باشد.";
+    } else if (!/^\d+$/.test(phoneField.value)) {
+      feedbackElement.textContent = "شماره فقط باید شامل ارقام باشد.";
     } else {
-      feedbackElement.textContent = "فرمت شماره مسنجر نادرست است.";
+      feedbackElement.textContent = "فرمت شماره معتبر نیست.";
     }
   } else {
     phoneField.classList.remove("is-invalid");
     phoneField.classList.add("is-valid");
-    feedbackElement.textContent = ""; // Clear error message
+    feedbackElement.textContent = "";
   }
 
   return validMessengerPhone;
 }
+
 
 function validateCars() {
   const radioButtons = document.querySelectorAll("input[name='carId']");

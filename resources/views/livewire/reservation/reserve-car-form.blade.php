@@ -198,14 +198,14 @@
                                                         </div>
                                                         <div class="col-6 col-md-3">
                                                             <div class="price-box bg-light rounded p-2 text-center">
-                                                                <div class="text-muted small">7-20 روز</div>
+                                                                <div class="text-muted small">7-28 روز</div>
                                                                 <div class="fw-bold text-danger fs-5">
                                                                     {{ $car->price_per_day_mid }} درهم</div>
                                                             </div>
                                                         </div>
                                                         <div class="col-6 col-md-3">
                                                             <div class="price-box bg-light rounded p-2 text-center">
-                                                                <div class="text-muted small">+20 روز</div>
+                                                                <div class="text-muted small">+28 روز</div>
                                                                 <div class="fw-bold text-danger fs-5">
                                                                     {{ $car->price_per_day_long }} درهم</div>
                                                             </div>
