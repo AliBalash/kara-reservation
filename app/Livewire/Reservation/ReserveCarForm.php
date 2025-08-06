@@ -29,7 +29,7 @@ class ReserveCarForm extends Component
     // public $confirm_deposit = false;
     public $accept_terms = false;
     public $total_payment;
-    public $selected_services = [];
+    public $selected_services = ['basic_insurance'];
     public $selected_insurance = null;
     public $services_total = 0;
 
