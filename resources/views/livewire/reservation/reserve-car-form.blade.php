@@ -371,15 +371,22 @@
                             خدمات و تجهیزات انتخابی
                         </h4>
                         <div class="g-3">
-
                             @foreach ($services as $serviceId => $service)
                                 <div class="col-md-4">
                                     <div class="card shadow-sm border-0">
                                         <div class="card-body d-flex justify-content-between align-items-center">
                                             <div class="d-flex align-items-center gap-3">
-                                                <input class="form-check-input ms-2" type="checkbox"
-                                                    wire:model.live="selected_services" name="selected_services[]"
-                                                    value="{{ $serviceId }}" id="{{ $serviceId }}">
+                                                @if ($serviceId === 'basic_insurance')
+                                                    <input class="form-check-input ms-2" type="checkbox"
+                                                        name="selected_services[]" value="{{ $serviceId }}"
+                                                        id="{{ $serviceId }}" checked disabled wire:ignore>
+                                                @else
+                                                    <input class="form-check-input ms-2" type="checkbox"
+                                                        wire:model.live="selected_services" name="selected_services[]"
+                                                        value="{{ $serviceId }}" id="{{ $serviceId }}"
+                                                        @if (in_array($serviceId, $selected_services)) checked @endif>
+                                                @endif
+
                                                 <label for="{{ $serviceId }}"
                                                     class="d-flex align-items-center m-0">
                                                     <i class="fa {{ $service['icon'] }} text-primary ms-2 fs-5"></i>
@@ -400,6 +407,8 @@
                                     </div>
                                 </div>
                             @endforeach
+
+
 
                             @isset($selectedCar)
                                 {{-- بیمه LDW --}}
@@ -837,3 +846,13 @@
         </div>
     </div>
 </div>
+@push('scripts')
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const checkbox = document.getElementById('basic_insurance');
+            if (checkbox) {
+                checkbox.checked = true;
+            }
+        });
+    </script>
+@endpush
