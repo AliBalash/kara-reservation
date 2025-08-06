@@ -48,6 +48,8 @@ function updateStep() {
     backBtn.classList.remove("d-none");
   }
 
+  scrollToTop(); // اسکرول به بالا
+
   // تغییر متن و رفتار دکمه Next در مراحل مختلف
   if (currentStep == allSteps.length - 1) {
     nextBtn.innerHTML = "تایید و ارسال نهایی";
@@ -410,3 +412,9 @@ function isValidReturnLocation(locationField) {
   return validLocation;
 }
 
+function scrollToTop() {
+  const wrapper = document.querySelector('.wrapper');
+  if (wrapper) {
+    wrapper.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+}
