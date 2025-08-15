@@ -15,3 +15,5 @@ Route::post('/reserve-car', [CarReservationController::class, 'reserveCar'])->na
 use App\Livewire\Discount\RegisteryDiscountCode;
 
 Route::get('/discount-code-form', RegisteryDiscountCode::class);
+
+Route::view('/reservation/thanks', 'reservation.thanks')->name('reservation.thanks');
