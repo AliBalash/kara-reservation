@@ -23,9 +23,11 @@ function updateStep() {
   if (currentStep === allSteps.length - 1) {
     nextBtn.innerHTML = "تایید و ارسال نهایی";
     nextBtn.classList.add("done");
+    nextBtn.type = "submit";
   } else {
     nextBtn.innerHTML = "مرحله بعد";
     nextBtn.classList.remove("done");
+    nextBtn.type = "button";
   }
 
   scrollToTop();
@@ -40,9 +42,8 @@ function nextStep(e) {
     }
 
     if (nextBtn.classList.contains("done")) {
-      checkoutForm.dispatchEvent(new Event("submit", { cancelable: true }));
-      checkoutForm.classList.add("d-none");
-      thankStep.classList.remove("d-none");
+      // Since type is now "submit", the browser will handle the form submission
+      // No need for manual dispatch; let the click event proceed naturally
     } else {
       currentStep++;
       updateStep();
@@ -83,17 +84,22 @@ function formChecker() {
     let acceptTerms = document.getElementById("accept_terms");
     let acceptTermsError = document.getElementById("accept_terms_error");
 
-    if (acceptTermsError && !acceptTermsError.textContent) {
-      acceptTermsError.textContent = "برای ادامه، باید شرایط را بپذیرید.";
+    if (!acceptTermsError) {
+      console.error("accept_terms_error element not found");
+      return false; // Gracefully fail if error element is missing
     }
 
     if (!acceptTerms.checked) {
       acceptTerms.classList.add("is-invalid");
-      if (acceptTermsError) acceptTermsError.classList.remove("d-none");
+      acceptTermsError.textContent = "برای ادامه، باید شرایط را بپذیرید.";
+      acceptTermsError.classList.remove("d-none");
+      acceptTermsError.classList.add("d-block");
       return false;
     } else {
       acceptTerms.classList.remove("is-invalid");
-      if (acceptTermsError) acceptTermsError.classList.add("d-none");
+      acceptTermsError.textContent = "";
+      acceptTermsError.classList.remove("d-block");
+      acceptTermsError.classList.add("d-none");
       return true;
     }
   }
@@ -126,6 +132,7 @@ function isValidName(nameField) {
   const re = /\w{3,}/i;
   let feedbackElement = nameField.nextElementSibling;
   if (!feedbackElement) {
+    console.error("Feedback element not found for name field");
     return false; // Gracefully fail if feedback element is missing
   }
   if (!feedbackElement.textContent) {
@@ -149,6 +156,7 @@ function isValidEmail(email) {
   const re = /[a-zA-Z0-9]+@[a-zA-Z0-9]+\.\w{1,}/i;
   let feedbackElement = email.nextElementSibling;
   if (!feedbackElement) {
+    console.error("Feedback element not found for email field");
     return false; // Gracefully fail if feedback element is missing
   }
   if (!feedbackElement.textContent) {
@@ -172,6 +180,7 @@ function isValidPhone(phoneField) {
   const re = /^\d{10,15}$/;
   let feedbackElement = phoneField.nextElementSibling;
   if (!feedbackElement) {
+    console.error("Feedback element not found for phone field");
     return false; // Gracefully fail if feedback element is missing
   }
   if (!feedbackElement.textContent) {
@@ -203,6 +212,7 @@ function isValidMessengerPhone(phoneField) {
   const re = /^\d{10,15}$/;
   let feedbackElement = phoneField.nextElementSibling;
   if (!feedbackElement) {
+    console.error("Feedback element not found for messenger phone field");
     return false; // Gracefully fail if feedback element is missing
   }
   if (phoneField.value === "") {
@@ -242,16 +252,18 @@ function validateCars() {
   const selectedCar = document.querySelector(".car-card.card-active");
 
   if (!feedback) {
+    console.error("bad-feedback-car element not found");
     return false; // Gracefully fail if feedback element is missing
   }
 
   if (!selectedCar) {
-    if (!feedback.textContent) {
-      feedback.textContent = "لطفاً یک خودرو انتخاب کنید.";
-    }
+    feedback.textContent = "لطفاً یک خودرو انتخاب کنید.";
     feedback.classList.remove("d-none");
+    feedback.classList.add("d-block");
     return false;
   } else {
+    feedback.textContent = "";
+    feedback.classList.remove("d-block");
     feedback.classList.add("d-none");
     return true;
   }
@@ -261,7 +273,8 @@ function validateCars() {
 function isValidDate(dateField) {
   let feedbackElement = dateField.nextElementSibling;
   if (!feedbackElement) {
-    return false; // Gracefully fail if feedback element is missing
+    console.error("Feedback element not found for date field");
+    return false;
   }
 
   if (!dateField.value || isNaN(new Date(dateField.value).getTime())) {
@@ -272,9 +285,13 @@ function isValidDate(dateField) {
     return false;
   }
 
-  // Ensure the date is not in the past (compare with current time)
+  // فقط روز را بررسی کنیم، ساعت را صفر کنیم
   const currentTime = new Date();
+  currentTime.setHours(0, 0, 0, 0);
+
   const selectedTime = new Date(dateField.value);
+  selectedTime.setHours(0, 0, 0, 0);
+
   if (selectedTime < currentTime) {
     feedbackElement.textContent = "تاریخ نمی‌تواند در گذشته باشد.";
     dateField.classList.remove("is-valid");
@@ -298,6 +315,7 @@ function isReturnDateAfterPickupDate(pickupField, returnField) {
   let feedbackElement = returnField.nextElementSibling;
 
   if (!feedbackElement) {
+    console.error("Feedback element not found for return date field");
     return false; // Gracefully fail if feedback element is missing
   }
 
@@ -331,6 +349,7 @@ function isReturnDateAfterPickupDate(pickupField, returnField) {
 function isValidPickupLocation(locationField) {
   let feedbackElement = locationField.nextElementSibling;
   if (!feedbackElement) {
+    console.error("Feedback element not found for pickup location field");
     return false; // Gracefully fail if feedback element is missing
   }
 
@@ -353,6 +372,7 @@ function isValidPickupLocation(locationField) {
 function isValidReturnLocation(locationField) {
   let feedbackElement = locationField.nextElementSibling;
   if (!feedbackElement) {
+    console.error("Feedback element not found for return location field");
     return false; // Gracefully fail if feedback element is missing
   }
 

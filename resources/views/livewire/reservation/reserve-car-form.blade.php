@@ -1,6 +1,6 @@
 <!-- main container start -->
 <div class="center-box d-flex justify-content-center align-items-center">
-    <div class="wrapper p-4" style="min-width: 800px; max-width: 1200px;">
+    <div class="wrapper p-4" style="min-width: 800px; max-width: 1400px;">
         <div class="gx-1">
             <form class="col-md-12 p-1 needs-validation" id="checkoutForm" wire:submit.prevent="submit" novalidate>
                 @csrf
@@ -289,12 +289,11 @@
                                 </div>
                             </div>
                         @endforeach
-                        <div class="bad-feedback-car bad-feedback text-danger d-none">
-                            @error('selectedCarId')
-                                {{ $message }}
-                            @enderror
-                        </div>
-
+                    </div>
+                    <div class="bad-feedback-car bad-feedback text-danger d-none">
+                        @error('selectedCarId')
+                            {{ $message }}
+                        @enderror
                     </div>
                 </div>
                 <!-- End car-step -->
@@ -314,7 +313,7 @@
                             <i class="fa fa-tools text-danger ms-2"></i>
                             خدمات و تجهیزات انتخابی
                         </h4>
-                        <div class="row g-3">
+                        <div class="g-3">
                             <!-- خدمات غیربیمه‌ای -->
                             @foreach ($services as $serviceId => $service)
                                 @if (!in_array($serviceId, ['ldw_insurance', 'scdw_insurance']))
@@ -809,24 +808,6 @@
                     <button type="button" id="next" class="btn btn-red">مرحله بعد</button>
                 </div>
             </form>
-
-            <!-- Start thanks step -->
-            <div class="thanks-step step d-flex align-items-center col-md-8 d-none" wire:ignore.self>
-                <header class="d-flex flex-column align-items-center text-center">
-                    <img class="w-50 mb-4" src="{{ asset('assets/reserve/assets/images/icon-thank-you.svg') }}"
-                        alt="Thank You Icon" />
-                    <h1 class="display-4">سپاس از رزرو شما!</h1>
-                    <p class="text-center lead mb-4">
-                        درخواست اجاره شما با موفقیت ثبت شد. کارشناسان ما به زودی برای تایید و اطلاعات بیشتر با شما تماس
-                        خواهند گرفت.
-                    </p>
-                    <div class="alert alert-secondary w-100 mb-4" role="alert">
-                        <strong>توجه:</strong> لطفاً ایمیل خود را برای دریافت به‌روزرسانی‌های رزرو بررسی کنید
-                    </div>
-                    <p>در صورت نیاز به کمک می‌توانید با ما تماس بگیرید</p>
-                    <a href="https://karaplusrental.com/" class="btn btn-primary mt-4">بازگشت به صفحه اصلی</a>
-                </header>
-            </div>
         </div>
     </div>
 </div>
@@ -843,7 +824,7 @@
 
         .wrapper {
             width: 100%;
-            min-width: 800px;
+            min-width: 1500px;
             max-width: 1200px;
             background: #fff;
             border-radius: 10px;

@@ -24,7 +24,7 @@
     <style>
         @font-face {
             font-family: "IRANSans_Regular";
-            src: url("../assets/fonts/IRANSans_Regular.ttf");
+            src: url("{{ asset('assets/reserve/assets/fonts/IRANSans_Regular.ttf') }}") format("truetype");
             font-weight: bold !important;
             font-style: normal !important;
         }
@@ -178,8 +178,6 @@
             gap: 4px;
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
         }
-
-        
     </style>
     @stack('styles')
 
