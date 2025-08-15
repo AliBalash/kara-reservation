@@ -2,266 +2,232 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Car;
 use App\Models\Contract;
 use App\Models\ContractCharges;
 use App\Models\Customer;
-use Illuminate\Http\Request;
 use Carbon\Carbon;
-use App\Models\Car;
+use Illuminate\Http\Request;
+use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Validation\Rule;
 
 class CarReservationController extends Controller
 {
-
-    public $taxAmount;
-    public $dailyRate;
-
     private $locationCosts = [
-        'UAE/Dubai/Clock Tower/Main Branch' => [
-            'under_3' => 0,
-            'over_3' => 0
-        ],
-        'UAE/Dubai/Downtown' => [
-            'under_3' => 50,
-            'over_3' => 50
-        ],
-        'UAE/Dubai/Dubai Airport/Terminal 1' => [
-            'under_3' => 50,
-            'over_3' => 0
-        ],
-        'UAE/Dubai/Dubai Airport/Terminal 2' => [
-            'under_3' => 50,
-            'over_3' => 0
-        ],
-        'UAE/Dubai/Dubai Airport/Terminal 3' => [
-            'under_3' => 50,
-            'over_3' => 0
-        ],
-        'UAE/Dubai/Jumeirah 1, 2, 3' => [
-            'under_3' => 45,
-            'over_3' => 45
-        ],
-        'UAE/Dubai/JBR' => [
-            'under_3' => 45,
-            'over_3' => 45
-        ],
-        'UAE/Dubai/Marina' => [
-            'under_3' => 45,
-            'over_3' => 45
-        ],
-        'UAE/Dubai/JLT' => [
-            'under_3' => 45,
-            'over_3' => 45
-        ],
-        'UAE/Dubai/JVC' => [
-            'under_3' => 60,
-            'over_3' => 60
-        ],
-        'UAE/Dubai/Damac Hills' => [
-            'under_3' => 60,
-            'over_3' => 60
-        ],
-        'UAE/Dubai/Palm' => [
-            'under_3' => 70,
-            'over_3' => 70
-        ],
-        'UAE/Dubai/Jebel Ali – Ibn Battuta – Hatta & more' => [
-            'under_3' => 70,
-            'over_3' => 70
-        ],
-        'UAE/Sharjah Airport' => [
-            'under_3' => 100,
-            'over_3' => 100
-        ],
-        'UAE/Abu Dhabi Airport' => [
-            'under_3' => 200,
-            'over_3' => 200
-        ]
+        'UAE/Dubai/Clock Tower/Main Branch' => ['under_3' => 0, 'over_3' => 0],
+        'UAE/Dubai/Downtown' => ['under_3' => 50, 'over_3' => 50],
+        'UAE/Dubai/Dubai Airport/Terminal 1' => ['under_3' => 50, 'over_3' => 0],
+        'UAE/Dubai/Dubai Airport/Terminal 2' => ['under_3' => 50, 'over_3' => 0],
+        'UAE/Dubai/Dubai Airport/Terminal 3' => ['under_3' => 50, 'over_3' => 0],
+        'UAE/Dubai/Jumeirah 1, 2, 3' => ['under_3' => 45, 'over_3' => 45],
+        'UAE/Dubai/JBR' => ['under_3' => 45, 'over_3' => 45],
+        'UAE/Dubai/Marina' => ['under_3' => 45, 'over_3' => 45],
+        'UAE/Dubai/JLT' => ['under_3' => 45, 'over_3' => 45],
+        'UAE/Dubai/JVC' => ['under_3' => 60, 'over_3' => 60],
+        'UAE/Dubai/Damac Hills' => ['under_3' => 60, 'over_3' => 60],
+        'UAE/Dubai/Palm' => ['under_3' => 70, 'over_3' => 70],
+        'UAE/Dubai/Jebel Ali – Ibn Battuta – Hatta & more' => ['under_3' => 70, 'over_3' => 70],
+        'UAE/Sharjah Airport' => ['under_3' => 100, 'over_3' => 100],
+        'UAE/Abu Dhabi Airport' => ['under_3' => 200, 'over_3' => 200],
     ];
 
     private function getCarDailyRate(Car $car, int $days): float
     {
-        if ($days >= 21) {
-            return $car->price_per_day_long;
-        } elseif ($days >= 7) {
-            return $car->price_per_day_mid;
-        }
-
+        if ($days >= 28) return $car->price_per_day_long ?? $car->price_per_day_mid ?? $car->price_per_day_short;
+        if ($days >= 7) return $car->price_per_day_mid ?? $car->price_per_day_short;
         return $car->price_per_day_short;
     }
 
-
     public function reserveCar(Request $request)
     {
-        // دریافت اطلاعات ماشین
-        $car = Car::findOrFail($request->carId);
+        try {
+            $validated = $request->validate([
+                'carId' => ['required', 'exists:cars,id'],
+                'pickup_date' => ['required', 'date', 'after_or_equal:today'],
+                'return_date' => ['required', 'date', 'after:pickup_date', 'after_or_equal:today'],
+                'pickup_location' => ['required', Rule::in(array_keys($this->locationCosts))],
+                'return_location' => ['required', Rule::in(array_keys($this->locationCosts))],
+                'first_name' => ['required', 'string', 'max:255'],
+                'last_name' => ['required', 'string', 'max:255'],
+                'email' => ['required', 'email', 'max:255', Rule::unique('customers')],
+                'phone' => ['required', 'max:15'],
+                'messenger_phone' => ['required', 'max:15'],
+                'selected_services' => ['array'],
+                'selected_services.*' => ['in:child_seat,additional_driver'],
+                'insurance' => ['required', Rule::in(['ldw_insurance', 'scdw_insurance'])],
+            ]);
 
-        // محاسبه تعداد روزها
-        $pickupDate = Carbon::parse($request->pickup_date);
-        $returnDate = Carbon::parse($request->return_date);
-        $rentalDays = max(1, $pickupDate->diffInDays($returnDate));
+            return DB::transaction(function () use ($validated) {
+                $car = Car::findOrFail($validated['carId']);
+                $pickupDate = Carbon::parse($validated['pickup_date']);
+                $returnDate = Carbon::parse($validated['return_date']);
+                $rentalDays = max(1, $pickupDate->diffInDays($returnDate));
 
-        // محاسبه هزینه پایه اجاره ماشین
-        $this->dailyRate = $this->getCarDailyRate($car, $rentalDays);
-        $basePrice = $this->dailyRate * $rentalDays;
-        // لیست کامل خدمات (همانند Livewire component)
-        $allServices = [
-            'basic_insurance' => [
-                'label' => 'بیمه پایه',
-                'amount' => 0,
-                'per_day' => false
-            ],
-            'child_seat' => [
-                'label' => 'صندلی کودک',
-                'amount' => 20,
-                'per_day' => true
-            ],
-            'additional_driver' => [
-                'label' => 'راننده اضافه',
-                'amount' => 20,
-                'per_day' => false
-            ],
-            'ldw_insurance' => [
-                'label' => 'بیمه LDW',
-                'amount' => $car->ldw_price,
-                'per_day' => true
-            ],
-            'scdw_insurance' => [
-                'label' => 'بیمه کامل',
-                'amount' => $car->scdw_price,
-                'per_day' => true
-            ],
-        ];
+                // بررسی رزروهای موجود
+                $reservations = Contract::where('car_id', $car->id)
+                    ->whereIn('current_status', ['pending', 'assigned', 'under_review', 'reserved', 'delivery', 'agreement_inspection', 'awaiting_return'])
+                    ->where('return_date', '>=', now())
+                    ->get();
 
-        // محاسبه هزینه سرویس‌ها
-        $selectedServices = $request->selected_services ?? [];
-        $insurance = $request->insurance ?? null;
+                foreach ($reservations as $reservation) {
+                    $existingPickup = Carbon::parse($reservation->pickup_date);
+                    $existingReturn = Carbon::parse($reservation->return_date);
+                    if ($pickupDate->lessThanOrEqualTo($existingReturn) && $returnDate->greaterThanOrEqualTo($existingPickup)) {
+                        throw new \Exception("این خودرو از {$reservation->pickup_date} تا {$reservation->return_date} رزرو شده است.");
+                    }
+                }
 
-        $allSelected = array_merge($selectedServices, $insurance ? [$insurance] : []);
+                $dailyRate = $this->getCarDailyRate($car, $rentalDays);
+                $basePrice = $dailyRate * $rentalDays;
 
-        $servicesTotal = 0;
-        $serviceBreakdown = [];
+                $allServices = config('carservices');
+                $selectedServices = $validated['selected_services'] ?? [];
+                $insurance = $validated['insurance'];
 
-        foreach ($allSelected as $key) {
-            if (!isset($allServices[$key])) continue;
+                $servicesTotal = 0;
+                $insuranceTotal = 0;
+                $serviceBreakdown = [];
+                $insuranceBreakdown = null;
 
-            $svc = $allServices[$key];
-            $amount = $svc['per_day'] ? $svc['amount'] * $rentalDays : $svc['amount'];
-            $servicesTotal += $amount;
-            $serviceBreakdown[] = [
-                'key' => $key,
-                'label' => $svc['label'],
-                'amount' => $amount,
-                'per_day' => $svc['per_day'],
-                'unit' => $svc['amount']
-            ];
+                foreach ($selectedServices as $serviceId) {
+                    if (!isset($allServices[$serviceId])) continue;
+                    $svc = $allServices[$serviceId];
+                    $amount = $svc['per_day'] ? $svc['amount'] * $rentalDays : $svc['amount'];
+                    $servicesTotal += $amount;
+                    $serviceBreakdown[] = [
+                        'label' => $svc['label_fa'],
+                        'amount' => $amount,
+                        'per_day' => $svc['per_day'],
+                        'unit' => $svc['amount'],
+                    ];
+                }
+
+                if ($insurance && isset($allServices[$insurance])) {
+                    $ins = $allServices[$insurance];
+                    $amount = $insurance === 'ldw_insurance' ? $car->ldw_price : $car->scdw_price;
+                    $insuranceTotal = $ins['per_day'] ? $amount * $rentalDays : $amount;
+                    $insuranceBreakdown = [
+                        'label' => $ins['label_fa'],
+                        'amount' => $insuranceTotal,
+                        'per_day' => $ins['per_day'],
+                        'unit' => $amount,
+                    ];
+                }
+
+                $pickupFee = $this->calculateLocationFee($validated['pickup_location'], $rentalDays);
+                $returnFee = $this->calculateLocationFee($validated['return_location'], $rentalDays);
+                $locationTotal = $pickupFee + $returnFee;
+
+                $subtotal = $basePrice + $servicesTotal + $insuranceTotal + $locationTotal;
+                $taxRate = 0.05;
+                $taxAmount = round($subtotal * $taxRate, 2);
+                $finalTotalPrice = $subtotal + $taxAmount;
+
+                $customer = Customer::updateOrCreate(
+                    ['email' => $validated['email']],
+                    [
+                        'first_name' => $validated['first_name'],
+                        'last_name' => $validated['last_name'],
+                        'phone' => $validated['phone'],
+                        'messenger_phone' => $validated['messenger_phone'],
+                        'registration_date' => now(),
+                        'status' => 'active',
+                    ]
+                );
+
+                $contract = Contract::create([
+                    'customer_id' => $customer->id,
+                    'car_id' => $car->id,
+                    'pickup_date' => $pickupDate,
+                    'return_date' => $returnDate,
+                    'pickup_location' => $validated['pickup_location'],
+                    'return_location' => $validated['return_location'],
+                    'total_price' => $finalTotalPrice,
+                    'current_status' => 'pending',
+                    'selected_services' => $selectedServices,
+                    'selected_insurance' => $insurance,
+                ]);
+
+                $this->createContractCharges($contract, $basePrice, $serviceBreakdown, $insuranceBreakdown, $pickupFee, $returnFee, $rentalDays, $taxAmount, $dailyRate);
+
+                return response()->noContent();
+            });
+        } catch (QueryException $e) {
+            Log::error('Database error in reserveCar: ' . $e->getMessage());
+            return response()->json(['error' => 'خطایی در ثبت رزرو رخ داد. لطفاً دوباره تلاش کنید.'], 500);
+        } catch (\Exception $e) {
+            Log::error('General error in reserveCar: ' . $e->getMessage());
+            return response()->json(['error' => $e->getMessage()], 500);
         }
-
-        // محاسبه هزینه مکان
-        $pickupFee = $this->calculateLocationFee($request->pickup_location, $rentalDays);
-        $returnFee = $this->calculateLocationFee($request->return_location, $rentalDays);
-        $locationTotal = $pickupFee + $returnFee;
-
-
-        // جمع کل
-        $totalPrice = $basePrice + $servicesTotal + $locationTotal;
-
-        //  tax
-        $taxRate = 0.05; // یعنی ۵٪
-        $this->taxAmount = round($totalPrice * $taxRate, 2);
-        $finalTotalPrice = $totalPrice + $this->taxAmount;
-
-        // ایجاد یا به‌روزرسانی مشتری
-        $customer = Customer::updateOrCreate(
-            ['email' => $request->email],
-            [
-                'first_name' => $request->first_name,
-                'last_name' => $request->last_name,
-                'phone' => $request->phone,
-                'messenger_phone' => $request->messenger_phone,
-                'registration_date' => now(),
-                'status' => 'active',
-            ]
-        );
-
-        // ثبت قرارداد
-        $contract = Contract::create([
-            'customer_id' => $customer->id,
-            'car_id' => $car->id,
-            'pickup_date' => $pickupDate,
-            'return_date' => $returnDate,
-            'pickup_location' => $request->pickup_location,
-            'return_location' => $request->return_location,
-            'total_price' => $finalTotalPrice, // قیمت نهایی با مالیات
-            'current_status' => 'pending',
-        ]);
-
-        // ثبت ریز هزینه‌ها
-        $this->createContractCharges($contract, $basePrice, $serviceBreakdown, $pickupFee, $returnFee, $rentalDays);
-
-        return response()->noContent();
     }
 
-
-    // تابع کمکی برای محاسبه هزینه مکان
     private function calculateLocationFee($location, $rentalDays)
     {
         $feeType = ($rentalDays < 3) ? 'under_3' : 'over_3';
-
-        return isset($this->locationCosts[$location][$feeType])
-            ? $this->locationCosts[$location][$feeType]
-            : 0;
+        return $this->locationCosts[$location][$feeType] ?? 0;
     }
 
-    // تابع ثبت هزینه‌ها در جدول contract_charges
-    private function createContractCharges($contract, $basePrice, $serviceBreakdown, $pickupFee, $returnFee, $rentalDays)
+    private function createContractCharges($contract, $basePrice, $serviceBreakdown, $insuranceBreakdown, $pickupFee, $returnFee, $rentalDays, $taxAmount, $dailyRate)
     {
+        $validTypes = ['base', 'addon', 'location_fee', 'tax', 'insurance'];
+
         ContractCharges::create([
             'contract_id' => $contract->id,
-            'title' => 'هزینه پایه اجاره',
+            'title' => 'base_rental',
             'amount' => $basePrice,
-            'type' => 'base',
-            'description' => "{$rentalDays} روز × {$this->dailyRate} درهم"
+            'type' => in_array('base', $validTypes) ? 'base' : throw new \Exception('Invalid charge type: base'),
+            'description' => "{$rentalDays} روز × {$dailyRate} درهم",
         ]);
 
         foreach ($serviceBreakdown as $svc) {
             ContractCharges::create([
                 'contract_id' => $contract->id,
-                'title' => $svc['label'],
+                'title' => array_search($svc['label'], array_column(config('carservices'), 'label_fa')),
                 'amount' => $svc['amount'],
-                'type' => 'addon',
-                'description' => $svc['per_day']
-                    ? "{$rentalDays} روز × {$svc['unit']} درهم"
-                    : 'یک‌بار هزینه'
+                'type' => in_array('addon', $validTypes) ? 'addon' : throw new \Exception('Invalid charge type: addon'),
+                'description' => $svc['per_day'] ? "{$rentalDays} روز × {$svc['unit']} درهم" : 'یک‌بار هزینه',
+            ]);
+        }
+
+        if ($insuranceBreakdown) {
+            ContractCharges::create([
+                'contract_id' => $contract->id,
+                'title' => array_search($insuranceBreakdown['label'], array_column(config('carservices'), 'label_fa')),
+                'amount' => $insuranceBreakdown['amount'],
+                'type' => in_array('insurance', $validTypes) ? 'insurance' : throw new \Exception('Invalid charge type: insurance'),
+                'description' => $insuranceBreakdown['per_day'] ? "{$rentalDays} روز × {$insuranceBreakdown['unit']} درهم" : 'یک‌بار هزینه',
             ]);
         }
 
         if ($pickupFee > 0) {
             ContractCharges::create([
                 'contract_id' => $contract->id,
-                'title' => 'هزینه مکان تحویل',
+                'title' => 'pickup_transfer',
                 'amount' => $pickupFee,
-                'type' => 'location_fee',
-                'description' => $contract->pickup_location
+                'type' => in_array('location_fee', $validTypes) ? 'location_fee' : throw new \Exception('Invalid charge type: location_fee'),
+                'description' => $contract->pickup_location,
             ]);
         }
 
         if ($returnFee > 0) {
             ContractCharges::create([
                 'contract_id' => $contract->id,
-                'title' => 'هزینه مکان بازگشت',
+                'title' => 'return_transfer',
                 'amount' => $returnFee,
-                'type' => 'location_fee',
-                'description' => $contract->return_location
+                'type' => in_array('location_fee', $validTypes) ? 'location_fee' : throw new \Exception('Invalid charge type: location_fee'),
+                'description' => $contract->return_location,
             ]);
         }
 
-        if ($this->taxAmount > 0) {
+        if ($taxAmount > 0) {
             ContractCharges::create([
                 'contract_id' => $contract->id,
-                'title' => 'مالیات',
-                'amount' => $this->taxAmount,
-                'type' => 'tax',
-                'description' => '۵٪ مالیات بر ارزش افزوده'
+                'title' => 'tax',
+                'amount' => $taxAmount,
+                'type' => in_array('tax', $validTypes) ? 'tax' : throw new \Exception('Invalid charge type: tax'),
+                'description' => '۵٪ مالیات بر ارزش افزوده',
             ]);
         }
     }
